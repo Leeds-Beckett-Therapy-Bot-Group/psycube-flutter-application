@@ -6,6 +6,7 @@ class TaskManager {
   int _taskNumber = 0;
 
 
+  // todo: add more tasks
   List<Task> _taskDataLevel1 = [
     Task(
       taskTitle: 'Dish Master',
@@ -57,7 +58,7 @@ class TaskManager {
         taskTitle: 'Educator',
         taskDescription: 'Do 2 hours on a project',
         taskPoint: 350,
-        taskLevel: 1
+        taskLevel: 2
     )
   ];
   String getTaskTitle() {
