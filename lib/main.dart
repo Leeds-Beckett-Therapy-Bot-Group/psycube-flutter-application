@@ -4,19 +4,14 @@ import 'constants.dart';
 
 void main() => runApp(Psycube());
 
-// for palettes check:
-// https://colorhunt.co/palette/131456
-// https://colorhunt.co/palette/133859
-// https://colorhunt.co/palette/151784
-// https://colorhunt.co/palette/155005 (morning mode) - not working?
-// https://colorhunt.co/palette/165211 (night mode)
-// https://colorhunt.co/palette/147389 (evening mode)
-// git:
+// git: https://github.com/Leeds-Beckett-Therapy-Bot-Group/psycube-flutter-application.git
 
 // todo: design profile page
 // todo: design chat page
 // todo: design settings page
 // todo: fix bottom nav bar
+
+// todo: make your own test branch - git checkout -b "your_branch_name"
 
 class Psycube extends StatelessWidget {
   @override

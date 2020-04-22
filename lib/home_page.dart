@@ -39,6 +39,7 @@ class _HomepageState extends State<Homepage> {
 
             margin: EdgeInsets.all(15.0),
             child: Text(
+              // todo: will need to grab username eventually
               'Hey username how are you doing today?',
               style: kSecondaryText,
             ),
