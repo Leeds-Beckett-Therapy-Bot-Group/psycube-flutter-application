@@ -2,6 +2,7 @@ import 'task.dart';
 
 class TaskManager {
 
+  // todo: needs updating to have a randomizer function
   int _taskNumber = 0;
 
 

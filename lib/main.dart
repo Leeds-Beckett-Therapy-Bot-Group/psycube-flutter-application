@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'constants.dart';
 
 void main() => runApp(Psycube());
 
@@ -22,10 +23,9 @@ class Psycube extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-          primaryColor: Color(0xFFf5fec0),
-          accentColor: Color(0xFFfddede),
-          scaffoldBackgroundColor: Color(0xFF60a9a6
-          ),
+          primaryColor: kPrimaryBlue,
+          accentColor: Color(0xFFFFFFFF),
+          scaffoldBackgroundColor: kPrimaryBlue
         ),
         home: Scaffold(
           body: SafeArea(child: Homepage()),

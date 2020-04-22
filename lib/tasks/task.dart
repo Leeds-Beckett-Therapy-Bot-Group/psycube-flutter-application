@@ -1,5 +1,5 @@
 // this class initialises values to be used
-// for creating the task cards
+// for creating the task cards see: task_manager
 
 class Task {
 

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'nav_bar.dart';
-import 'task_tile.dart';
+import 'tasks/task_tile.dart';
+import 'constants.dart';
+import 'tasks/task_tracker.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+
 
 class Homepage extends StatefulWidget {
   @override
@@ -14,10 +17,21 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Psycube'
+          'Psycube',
+          style: kHeaderText,
         ),
       ),
-      bottomNavigationBar: NavBar(),
+      // bottomNavigationBar: NavBar(), todo: create pull out navigation
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // todo: add task functionality
+        },
+        backgroundColor: kPrimaryBlue,
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -25,39 +39,22 @@ class _HomepageState extends State<Homepage> {
 
             margin: EdgeInsets.all(15.0),
             child: Text(
-              'Hey username how are you doing today?'
+              'Hey username how are you doing today?',
+              style: kSecondaryText,
             ),
           ),
           Expanded(
             child: Container(
               margin: EdgeInsets.all(15.0),
               decoration: BoxDecoration(
-                  color: Color(0xFFfddede),
+                  color: kPrimaryBlue,
                   borderRadius: BorderRadius.circular(10.0)),
               child: Row(
                 children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Text('Level 1'),
-                      Text('Points this week:'),
-                      Text('Total points'),
-
-                    ],
-                  ),
                   Expanded(
                     flex: 2,
                     child: Container(
-                      child: CircularPercentIndicator(
-                        radius: 100.0,
-                        lineWidth: 10.0,
-                        percent: 0.8,
-                        animation: true,
-                        header: Text('Tracker'),
-                        center: Text('current_points'),
-                        backgroundColor: Color(0xFFcaf2d7),
-                        progressColor: Color(0xFFf5fec0),
-                      ),
+                      child: Tracker()
                     ),
                   )
                 ],
@@ -69,7 +66,7 @@ class _HomepageState extends State<Homepage> {
             child: Container(
               margin: EdgeInsets.all(15.0),
               decoration: BoxDecoration(
-                  color: Color(0xFFfddede),
+                  color: kPrimaryBlue,
                   borderRadius: BorderRadius.circular(10.0)),
               child: Column(
                 children: <Widget>[
@@ -80,12 +77,13 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
           ),
-
         ],
       ),
     );
   }
 }
+
+
 
 
 

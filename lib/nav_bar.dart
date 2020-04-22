@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// todo: legacy code needs removing eventually
+
 class NavBar extends StatelessWidget {
 
   @override
