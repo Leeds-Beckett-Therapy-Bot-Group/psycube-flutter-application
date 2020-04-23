@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'nav_bar.dart';
-import 'tasks/task_tile.dart';
-import 'constants.dart';
-import 'tasks/task_tracker.dart';
+import '../nav_bar.dart';
+import '../tasks/task_tile.dart';
+import '../constants.dart';
+import '../tasks/task_tracker.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 

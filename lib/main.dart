@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
+import 'screens/home_page.dart';
 import 'constants.dart';
 
 void main() => runApp(Psycube());
