@@ -10,10 +10,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:therapyapp/main.dart';
 
+// todo: late stage add some testing parameters
+
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(Psycube());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import '../nav_bar.dart';
 import '../tasks/task_tile.dart';
 import '../constants.dart';
 import '../tasks/task_tracker.dart';
-import 'package:percent_indicator/percent_indicator.dart';
+import 'package:therapyapp/components/navigation_drawer.dart';
 
 
 class Homepage extends StatefulWidget {
@@ -15,6 +14,7 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationDrawer(),
       appBar: AppBar(
         title: Text(
           'Psycube',
@@ -83,6 +83,8 @@ class _HomepageState extends State<Homepage> {
     );
   }
 }
+
+
 
 
 
