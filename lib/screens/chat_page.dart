@@ -1,7 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:therapyapp/constants.dart';
+import 'package:bubble/bubble.dart';
+import 'package:speech_to_text/speech_to_text.dart';
+import 'package:speech_to_text/speech_recognition_error.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'dart:async';
 
-class ChatBot extends StatelessWidget {
+
+class ChatBot extends StatefulWidget {
+
+  @override
+  _ChatBotState createState() => _ChatBotState();
+}
+
+class _ChatBotState extends State<ChatBot> {
+
+  String introText = 'Hey user, ready to chat? Press play or say'
+      ' "Start" to begin a session. You can stop the session '
+      'by pressing the Stop button or by saying "Stop" ';
+
+
+  bool _hasSpeech = false;
+  double level = 0.0;
+  String lastWords = "";
+  String lastError = "";
+  String lastStatus = "";
+  String _currentLocaleId = "";
+  List<LocaleName> _localeNames = [];
+  final SpeechToText speech = SpeechToText();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Future<void> initSpeechState() async {
+    bool hasSpeech = await speech.initialize(
+        onError: errorListener, onStatus: statusListener);
+    if (hasSpeech) {
+      _localeNames = await speech.locales();
+
+      var systemLocale = await speech.systemLocale();
+      _currentLocaleId = systemLocale.localeId;
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _hasSpeech = hasSpeech;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +75,26 @@ class ChatBot extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              // todo: there has to be another way to centre these buttons in a nicer way
+              SizedBox(
+                width: 50.0
+              ),
+              // todo: needs migrating to rawmaterialbutton
+              FloatingActionButton(
+                heroTag: 'button0',
+                child: Icon(Icons.power_settings_new),
+                onPressed: _hasSpeech ? null : initSpeechState,
+              ),
+              SizedBox(
+                width: 20.0,
+              ),
               // todo: needs migrating to rawmaterialbutton
               FloatingActionButton(
                 heroTag: 'button1',
                 child: Icon(Icons.play_arrow),
+                onPressed: !_hasSpeech || speech.isListening
+                            ? null
+                            : startListening,
               ),
               SizedBox(
                 width: 20.0,
@@ -39,17 +103,113 @@ class ChatBot extends StatelessWidget {
               FloatingActionButton(
                 heroTag: 'button2',
                 child: Icon(Icons.stop),
+                onPressed: speech.isListening ? stopListening : null,
+              ),
+              SizedBox(
+                width: 20.0,
+              ),
+              FloatingActionButton(
+                heroTag: 'button3',
+                child: Icon(Icons.pause),
+                onPressed: speech.isListening ? cancelListening : null,
               ),
             ],
           ),
 
           Expanded(
             child: Container(
+              width: double.infinity,
               color: kAccentBlue,
+              child: Container(
+                padding: EdgeInsets.all(15.0),
+                child: Column(
+                  children: <Widget>[
+                    Bubble(
+                      alignment: Alignment.center,
+                      child: Text('Today' ,
+                      style: kChatBotText,),
+                    ),
+                    Bubble(
+                      margin: BubbleEdges.only(top: 10.0),
+                      radius: Radius.circular(20.0),
+                      alignment: Alignment.topLeft,
+                      nip: BubbleNip.leftTop,
+                      child: Text(introText,
+                      style: kChatBotText,)
+                    ),
+                    Bubble(
+                        margin: BubbleEdges.only(top: 10.0),
+                        radius: Radius.circular(20.0),
+                        alignment: Alignment.topRight,
+                        nip: BubbleNip.rightTop,
+                        child: Text(lastWords,
+                          style: kChatBotText,)
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  void startListening() {
+    lastWords = "";
+    lastError = "";
+    speech.listen(
+        onResult: resultListener,
+        listenFor: Duration(seconds: 10),
+        localeId: _currentLocaleId,
+        onSoundLevelChange: soundLevelListener,
+        cancelOnError: true,
+        partialResults: true);
+    setState(() {});
+  }
+
+  void stopListening() {
+    speech.stop();
+    setState(() {
+      level = 0.0;
+    });
+  }
+
+  void cancelListening() {
+    speech.cancel();
+    setState(() {
+      level = 0.0;
+    });
+  }
+
+  void resultListener(SpeechRecognitionResult result) {
+    setState(() {
+      lastWords = "${result.recognizedWords} - ${result.finalResult}";
+    });
+  }
+
+  void soundLevelListener(double level) {
+    setState(() {
+      this.level = level;
+    });
+  }
+
+  void errorListener(SpeechRecognitionError error) {
+    setState(() {
+      lastError = "${error.errorMsg} - ${error.permanent}";
+    });
+  }
+
+  void statusListener(String status) {
+    setState(() {
+      lastStatus = "$status";
+    });
+  }
+
+  _switchLang(selectedVal) {
+    setState(() {
+      _currentLocaleId = selectedVal;
+    });
+    print(selectedVal);
   }
 }
