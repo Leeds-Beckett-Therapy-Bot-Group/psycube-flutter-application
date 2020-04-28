@@ -3,8 +3,6 @@ import 'package:therapyapp/constants.dart';
 import 'package:therapyapp/screens/chat_page.dart';
 import 'package:therapyapp/screens/home_page.dart';
 
-// todo: needs refactoring to have route maps and made prettier etc..
-
 class NavigationDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -35,6 +33,23 @@ class NavigationDrawer extends StatelessWidget {
                 Navigator.pop(context);
                 Navigator.pushNamed(context, '/ChatBot');
               }),
+          NavTile(
+            barTitle: Text(
+              'Profile'
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/ProfilePage');
+            },
+          ),
+          NavTile(
+            barTitle: Text(
+              'Settings'
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/SettingsPage');
+            },
+          ),
         ],
       ),
     );
