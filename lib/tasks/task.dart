@@ -9,4 +9,5 @@ class Task {
   int taskLevel;
 
   Task({this.taskTitle, this.taskDescription, this.taskPoint, this.taskLevel});
+
 }

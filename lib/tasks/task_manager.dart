@@ -1,18 +1,15 @@
+import 'dart:math';
 import 'task.dart';
 
 class TaskManager {
 
-  // todo: needs updating to have a randomizer function
-  int _taskNumber = 0;
-
-
   // todo: add more tasks
   List<Task> _taskDataLevel1 = [
     Task(
-      taskTitle: 'Dish Master',
-      taskDescription: 'Do the dishes',
-      taskPoint: 100,
-      taskLevel: 1
+        taskTitle: 'Dish Master',
+        taskDescription: 'Do the dishes',
+        taskPoint: 100,
+        taskLevel: 1
     ),
     Task(
       taskTitle: 'Clean Dude',
@@ -61,16 +58,23 @@ class TaskManager {
         taskLevel: 2
     )
   ];
+
+  // randomize integer within the bounds of the array length
+  int randomTaskNum() {
+    int _taskNumber = _taskDataLevel1.length;
+    return (new Random().nextInt(_taskNumber));
+  }
+
   String getTaskTitle() {
-    return _taskDataLevel1[_taskNumber].taskTitle;
+    return _taskDataLevel1[randomTaskNum()].taskTitle;
   }
 
   String getTaskDescription() {
-    return _taskDataLevel1[_taskNumber].taskDescription;
+    return _taskDataLevel1[randomTaskNum()].taskDescription;
   }
 
   int getTaskPoint() {
-    return _taskDataLevel1[_taskNumber].taskPoint;
+    return _taskDataLevel1[randomTaskNum()].taskPoint;
   }
 
   int getTaskLevel() {
