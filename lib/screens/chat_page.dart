@@ -8,7 +8,6 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:async';
 import '../components/navigation_drawer.dart';
 
-
 class ChatBot extends StatefulWidget {
 
   @override
@@ -16,9 +15,6 @@ class ChatBot extends StatefulWidget {
 }
 
 class _ChatBotState extends State<ChatBot> {
-
-
-
   // instantiate flutter text to speech module
   FlutterTts flutterTts = FlutterTts();
 
@@ -26,10 +22,10 @@ class _ChatBotState extends State<ChatBot> {
   String introText = 'Hey user, when you\'re ready, wake me up '
                       'by pressing my on button';
 
-  String introText2 = 'Press play or say'
-                      ' "Start" to begin a session. You can stop the session '
+  String introText2 = 'Press play or say "Start" to begin a session. You can stop the session '
                         'by pressing the Stop button or by saying "Stop" ';
 
+  int _introChatTracker = 0;
   String language = 'en-AU-Standard-A';
   double volume = 1.5;
   double pitch = 1.4;
@@ -69,14 +65,18 @@ class _ChatBotState extends State<ChatBot> {
 
   @override
   Widget build(BuildContext context) {
-    Future _speak() async {
-      
-      await flutterTts.setVolume(volume);
-      await flutterTts.setPitch(pitch);
-      await flutterTts.setSpeechRate(rate);
-      await flutterTts.setLanguage(language);
 
-      await flutterTts.speak(introText);
+    // _introChatTracker should be incremented to ensure this is only ran once
+    Future _speak() async {
+      while (_introChatTracker == 0) {
+        await flutterTts.setVolume(volume);
+        await flutterTts.setPitch(pitch);
+        await flutterTts.setSpeechRate(rate);
+        await flutterTts.setLanguage(language);
+        await flutterTts.speak(introText);
+
+        _introChatTracker++;
+      }
     }
 
     _speak();
