@@ -105,7 +105,9 @@ class _ChatBotState extends State<ChatBot> {
               ),
             ],
           ),
-
+          SizedBox(
+            height: 15,
+          ),
           Expanded(
             child: Container(
               width: double.infinity,

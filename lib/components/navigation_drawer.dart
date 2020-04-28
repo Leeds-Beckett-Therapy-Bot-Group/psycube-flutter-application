@@ -23,9 +23,9 @@ class NavigationDrawer extends StatelessWidget {
             barTitle: Text(
               'Home',
             ),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/HomePage');
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/HomePage');
             },
           ),
           NavTile(
