@@ -4,6 +4,7 @@ import 'screens/home_page.dart';
 import 'constants.dart';
 import 'screens/profile_page.dart';
 import 'screens/settings_page.dart';
+import 'screens/newtask_page.dart';
 
 void main() => runApp(Psycube());
 
@@ -40,6 +41,7 @@ class Psycube extends StatelessWidget {
           '/ChatBot': (context) => ChatBot(),
           '/ProfilePage': (context) => ProfilePage(),
           '/SettingsPage': (context) => SettingsPage(),
+          '/NewTask': (context) => NewTask(),
         },
         home: Scaffold(
           body: SafeArea(
