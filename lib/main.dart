@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:therapyapp/screens/chat_page.dart';
 import 'screens/home_page.dart';
 import 'constants.dart';
 
@@ -32,8 +33,14 @@ class Psycube extends StatelessWidget {
           accentColor: Color(0xFFFFFFFF),
           scaffoldBackgroundColor: kPrimaryBlue
         ),
+        routes: {
+          '/HomePage': (context) => Homepage(),
+          '/ChatBot': (context) => ChatBot(),
+        },
         home: Scaffold(
-          body: SafeArea(child: Homepage()),
+          body: SafeArea(
+              child: Homepage()
+          ),
         ));
   }
 }

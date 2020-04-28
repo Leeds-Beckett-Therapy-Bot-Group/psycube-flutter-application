@@ -5,6 +5,7 @@ import 'package:speech_to_text/speech_to_text.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'dart:async';
+import '../components/navigation_drawer.dart';
 
 
 class ChatBot extends StatefulWidget {
@@ -54,6 +55,7 @@ class _ChatBotState extends State<ChatBot> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavigationDrawer(),
       appBar: AppBar(
         title: Text(
           'Psycube',
