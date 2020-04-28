@@ -101,19 +101,13 @@ class _ChatBotState extends State<ChatBot> {
 
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              // todo: there has to be another way to centre these buttons in a nicer way
-              SizedBox(
-                width: 50.0
-              ),
               // todo: needs migrating to rawmaterialbutton
               FloatingActionButton(
                 heroTag: 'button0',
                 child: Icon(Icons.power_settings_new),
                 onPressed: _hasSpeech ? null : initSpeechState,
-              ),
-              SizedBox(
-                width: 20.0,
               ),
               // todo: needs migrating to rawmaterialbutton
               FloatingActionButton(
@@ -123,17 +117,11 @@ class _ChatBotState extends State<ChatBot> {
                             ? null
                             : startListening,
               ),
-              SizedBox(
-                width: 20.0,
-              ),
               // todo: needs migrating to rawmaterialbutton
               FloatingActionButton(
                 heroTag: 'button2',
                 child: Icon(Icons.stop),
                 onPressed: speech.isListening ? stopListening : null,
-              ),
-              SizedBox(
-                width: 20.0,
               ),
               FloatingActionButton(
                 heroTag: 'button3',
