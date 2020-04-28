@@ -6,6 +6,7 @@ import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:async';
+import '../components/navigation_drawer.dart';
 
 
 class ChatBot extends StatefulWidget {
@@ -81,6 +82,7 @@ class _ChatBotState extends State<ChatBot> {
     _speak();
 
     return Scaffold(
+      drawer: NavigationDrawer(),
       appBar: AppBar(
         title: Text(
           'Psycube',
