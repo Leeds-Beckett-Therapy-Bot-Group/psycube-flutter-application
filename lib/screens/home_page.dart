@@ -24,7 +24,7 @@ class _HomepageState extends State<Homepage> {
       // bottomNavigationBar: NavBar(), todo: create pull out navigation
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // todo: add task functionality
+          Navigator.pushNamed(context, '/NewTask');
         },
         backgroundColor: kPrimaryBlue,
         child: Icon(
