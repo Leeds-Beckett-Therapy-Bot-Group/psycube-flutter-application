@@ -21,6 +21,8 @@ class TaskTileUpdate extends State<TaskTile> {
   int _defaultScore = 0;
   int _levelOne = 1000;
 
+
+
   String addToTracker() {
       int point = taskManager.getTaskPoint(); // see task_manager for assigned points
       _defaultScore = _defaultScore + point;

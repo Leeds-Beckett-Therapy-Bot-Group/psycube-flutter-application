@@ -4,6 +4,7 @@ import 'package:bubble/bubble.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:async';
 
 
@@ -15,11 +16,25 @@ class ChatBot extends StatefulWidget {
 
 class _ChatBotState extends State<ChatBot> {
 
-  String introText = 'Hey user, ready to chat? Press play or say'
-      ' "Start" to begin a session. You can stop the session '
-      'by pressing the Stop button or by saying "Stop" ';
 
 
+  // instantiate flutter text to speech module
+  FlutterTts flutterTts = FlutterTts();
+
+  // variables for use in text to speech
+  String introText = 'Hey user, when you\'re ready, wake me up '
+                      'by pressing my on button';
+
+  String introText2 = 'Press play or say'
+                      ' "Start" to begin a session. You can stop the session '
+                        'by pressing the Stop button or by saying "Stop" ';
+
+  String language = 'en-AU-Standard-A';
+  double volume = 1.5;
+  double pitch = 1.4;
+  double rate = 1.25;
+
+  // variables for use in speech to text
   bool _hasSpeech = false;
   double level = 0.0;
   String lastWords = "";
@@ -53,6 +68,18 @@ class _ChatBotState extends State<ChatBot> {
 
   @override
   Widget build(BuildContext context) {
+    Future _speak() async {
+      
+      await flutterTts.setVolume(volume);
+      await flutterTts.setPitch(pitch);
+      await flutterTts.setSpeechRate(rate);
+      await flutterTts.setLanguage(language);
+
+      await flutterTts.speak(introText);
+    }
+
+    _speak();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -206,10 +233,4 @@ class _ChatBotState extends State<ChatBot> {
     });
   }
 
-  _switchLang(selectedVal) {
-    setState(() {
-      _currentLocaleId = selectedVal;
-    });
-    print(selectedVal);
-  }
 }
