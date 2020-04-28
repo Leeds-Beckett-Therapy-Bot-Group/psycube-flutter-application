@@ -6,39 +6,79 @@ import 'package:therapyapp/screens/home_page.dart';
 // todo: needs refactoring to have route maps and made prettier etc..
 
 class NavigationDrawer extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
-            child: Text('Navigation'),
-            decoration: BoxDecoration(
-                color: kAccentBlue
-            ),
+          NavDrawHeader(
+            accountName: Text(
+                'PsyCube Example',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                )),
+            accountEmail: Text('psycube@gmail.com'),
           ),
           NavTile(
             barTitle: Text(
               'Home',
             ),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/HomePage');
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/HomePage');
             },
           ),
           NavTile(
-            barTitle: Text(
-              'Chat'
-            ),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, '/ChatBot');
-            }
-          ),
+              barTitle: Text('Chat'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/ChatBot');
+              }),
         ],
       ),
+    );
+  }
+}
+
+class NavDrawHeader extends StatelessWidget {
+  NavDrawHeader({@required this.accountName, @required this.accountEmail});
+
+  final Text accountName;
+  final Text accountEmail;
+  @override
+  Widget build(BuildContext context) {
+    return DrawerHeader(
+      decoration: BoxDecoration(
+        color: kPrimaryBlue,
+      ),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+        Row(
+            children: <Widget>[
+          CircleAvatar(
+            radius: 40,
+            child: Text(
+              'E',
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                color: kPrimaryBlue,
+              ),
+            ),
+          ),
+        ]),
+        SizedBox(
+          height: 20,
+        ),
+        Row(children: <Widget>[
+          accountName,
+        ]),
+        Row(children: <Widget>[
+          accountEmail,
+        ]),
+      ]),
     );
   }
 }
