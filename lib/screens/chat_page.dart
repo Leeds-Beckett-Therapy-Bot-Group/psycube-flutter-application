@@ -7,6 +7,7 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:async';
 import '../components/navigation_drawer.dart';
+import '../components/speech_button.dart';
 
 class ChatBot extends StatefulWidget {
 
@@ -88,88 +89,92 @@ class _ChatBotState extends State<ChatBot> {
           'Psycube',
           style: kHeaderText,
         ),
+        backgroundColor: Color(0xFF107dac),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(35.0),
-              child: Image.asset('images/cube-placeholder.png'),
-
-            ),
-          ),
-
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              // todo: needs migrating to rawmaterialbutton
-              FloatingActionButton(
-                heroTag: 'button0',
-                child: Icon(Icons.power_settings_new),
-                onPressed: _hasSpeech ? null : initSpeechState,
-              ),
-              // todo: needs migrating to rawmaterialbutton
-              FloatingActionButton(
-                heroTag: 'button1',
-                child: Icon(Icons.play_arrow),
-                onPressed: !_hasSpeech || speech.isListening
-                            ? null
-                            : startListening,
-              ),
-              // todo: needs migrating to rawmaterialbutton
-              FloatingActionButton(
-                heroTag: 'button2',
-                child: Icon(Icons.stop),
-                onPressed: speech.isListening ? stopListening : null,
-              ),
-              FloatingActionButton(
-                heroTag: 'button3',
-                child: Icon(Icons.pause),
-                onPressed: speech.isListening ? cancelListening : null,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              color: kAccentBlue,
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xFF005073), Color(0xFF71c7ec)])
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Expanded(
               child: Container(
-                padding: EdgeInsets.all(15.0),
-                child: Column(
+                padding: EdgeInsets.all(35.0),
+                child: Image.asset('images/cube-placeholder.png'),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                child: Container(
+                  padding: EdgeInsets.all(15.0),
+                  child: Column(
+                    children: <Widget>[
+                      Bubble(
+                        alignment: Alignment.center,
+                        child: Text('Today' ,
+                          style: kChatBotText,),
+                      ),
+                      Bubble(
+                          margin: BubbleEdges.only(top: 10.0),
+                          radius: Radius.circular(20.0),
+                          alignment: Alignment.topLeft,
+                          nip: BubbleNip.leftTop,
+                          child: Text(introText,
+                            style: kChatBotText,)
+                      ),
+                      Bubble(
+                          margin: BubbleEdges.only(top: 10.0),
+                          radius: Radius.circular(20.0),
+                          alignment: Alignment.topRight,
+                          nip: BubbleNip.rightTop,
+                          child: Text(lastWords,
+                            style: kChatBotText,)
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Container(
+                color: Color(0xFF107dac),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Bubble(
-                      alignment: Alignment.center,
-                      child: Text('Today' ,
-                      style: kChatBotText,),
+                    SpeechButton(
+                      icon: Icons.power_settings_new,
+                      onTap: _hasSpeech ? null : initSpeechState,
                     ),
-                    Bubble(
-                      margin: BubbleEdges.only(top: 10.0),
-                      radius: Radius.circular(20.0),
-                      alignment: Alignment.topLeft,
-                      nip: BubbleNip.leftTop,
-                      child: Text(introText,
-                      style: kChatBotText,)
+                    SpeechButton(
+                      icon: Icons.mic,
+                      onTap: !_hasSpeech || speech.isListening
+                          ? null
+                          : startListening,
                     ),
-                    Bubble(
-                        margin: BubbleEdges.only(top: 10.0),
-                        radius: Radius.circular(20.0),
-                        alignment: Alignment.topRight,
-                        nip: BubbleNip.rightTop,
-                        child: Text(lastWords,
-                          style: kChatBotText,)
-                    )
+                    SpeechButton(
+                      icon: Icons.stop,
+                      onTap: speech.isListening ? stopListening : null,
+                    ),
+                    SpeechButton(
+                      icon: Icons.pause,
+                      onTap: speech.isListening ? cancelListening : null,
+                    ),
                   ],
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

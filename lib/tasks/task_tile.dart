@@ -44,7 +44,6 @@ class TaskTileUpdate extends State<TaskTile> {
         margin: EdgeInsets.all(5.0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            color: kPrimaryBlue,
             border: Border.all(width: 3.0, color: Colors.white)
         ),
 

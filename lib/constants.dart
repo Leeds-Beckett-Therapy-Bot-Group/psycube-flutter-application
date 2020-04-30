@@ -20,7 +20,7 @@ const TextStyle kSecondaryText = TextStyle(
 );
 
 const TextStyle kChatBotText = TextStyle(
-  color: Color(0xFF33ccff),
+  color: Color(0xFF005073),
   fontWeight: FontWeight.w500,
   fontFamily: 'Baloo'
 );
