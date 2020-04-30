@@ -15,7 +15,18 @@ class _NewTaskState extends State<NewTask> {
         title: Text(
           'PsyCube',
           style: kHeaderText,
-        )
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+          backgroundColor: Color(0xFF107dac)
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xFF005073), Color(0xFF71c7ec)])),
       ),
     );
   }

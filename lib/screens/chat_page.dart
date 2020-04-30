@@ -90,6 +90,9 @@ class _ChatBotState extends State<ChatBot> {
           style: kHeaderText,
         ),
         backgroundColor: Color(0xFF107dac),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
       ),
       body: Container(
         decoration: BoxDecoration(
