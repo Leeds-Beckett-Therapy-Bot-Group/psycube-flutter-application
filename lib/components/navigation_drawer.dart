@@ -65,7 +65,10 @@ class NavDrawHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return DrawerHeader(
       decoration: BoxDecoration(
-        color: kPrimaryBlue,
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF005073), Color(0xFF71c7ec)])
       ),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -74,14 +77,7 @@ class NavDrawHeader extends StatelessWidget {
             children: <Widget>[
           CircleAvatar(
             radius: 40,
-            child: Text(
-              'E',
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
-                color: kPrimaryBlue,
-              ),
-            ),
+            backgroundImage: AssetImage('images/avatar.png'),
           ),
         ]),
         SizedBox(

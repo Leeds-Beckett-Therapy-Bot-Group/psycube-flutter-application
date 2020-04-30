@@ -20,6 +20,9 @@ class _HomepageState extends State<Homepage> {
           style: kHeaderText,
         ),
         backgroundColor: Color(0xFF107dac),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
