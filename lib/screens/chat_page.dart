@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:therapyapp/constants.dart';
-import 'package:bubble/bubble.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:async';
 import '../components/navigation_drawer.dart';
 import '../components/speech_button.dart';
+import 'package:therapyapp/speech/dialogue_control.dart';
 
 class ChatBot extends StatefulWidget {
 
@@ -16,6 +16,12 @@ class ChatBot extends StatefulWidget {
 }
 
 class _ChatBotState extends State<ChatBot> {
+
+
+  DialogueControl dialogueControl = DialogueControl();
+  ChatMessages chatMessage = ChatMessages();
+
+
   // instantiate flutter text to speech module
   FlutterTts flutterTts = FlutterTts();
 
@@ -111,34 +117,7 @@ class _ChatBotState extends State<ChatBot> {
             Expanded(
               child: Container(
                 width: double.infinity,
-                child: Container(
-                  padding: EdgeInsets.all(15.0),
-                  child: Column(
-                    children: <Widget>[
-                      Bubble(
-                        alignment: Alignment.center,
-                        child: Text('Today' ,
-                          style: kChatBotText,),
-                      ),
-                      Bubble(
-                          margin: BubbleEdges.only(top: 10.0),
-                          radius: Radius.circular(20.0),
-                          alignment: Alignment.topLeft,
-                          nip: BubbleNip.leftTop,
-                          child: Text(introText,
-                            style: kChatBotText,)
-                      ),
-                      Bubble(
-                          margin: BubbleEdges.only(top: 10.0),
-                          radius: Radius.circular(20.0),
-                          alignment: Alignment.topRight,
-                          nip: BubbleNip.rightTop,
-                          child: Text(lastWords,
-                            style: kChatBotText,)
-                      )
-                    ],
-                  ),
-                ),
+                child: DialogueControl()
               ),
             ),
             Container(
