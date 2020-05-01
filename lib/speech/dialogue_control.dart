@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:bubble/bubble.dart';
 import 'package:therapyapp/constants.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'speech_recognition.dart';
+
 
 class DialogueControl extends StatefulWidget {
   DialogueControl({Key key, this.title}) : super (key: key);
@@ -14,6 +17,15 @@ class DialogueControl extends StatefulWidget {
 
 class _DialogueControlState extends State<DialogueControl> {
 
+  SpeechRecognition speechRecognition = SpeechRecognition();
+  FlutterTts flutterTts = FlutterTts();
+
+  String language = 'en-AU-Standard-A';
+  double volume = 1.5;
+  double pitch = 1.4;
+  double rate = 1.25;
+
+  // instantiate chatMessage list , an array which contains the conversation
   final List<ChatMessages> _messages = <ChatMessages>[];
   final TextEditingController _textController = TextEditingController();
 
@@ -56,7 +68,16 @@ class _DialogueControlState extends State<DialogueControl> {
     );
     setState(() {
       _messages.insert(0, message);
+      _speak(message.text);
     });
+  }
+
+  Future _speak(String text) async {
+      await flutterTts.setVolume(volume);
+      await flutterTts.setPitch(pitch);
+      await flutterTts.setSpeechRate(rate);
+      await flutterTts.setLanguage(language);
+      await flutterTts.speak(text);
   }
 
   void _handleSubmitted(String text) {
@@ -71,7 +92,6 @@ class _DialogueControlState extends State<DialogueControl> {
     });
     response(text);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -93,8 +113,9 @@ class _DialogueControlState extends State<DialogueControl> {
 }
 
 class ChatMessages extends StatelessWidget {
-  ChatMessages({this.text, this.name, this.type});
+  ChatMessages({this.text, this.name, this.type, this.speechRecognition});
 
+  final String speechRecognition;
   final String text;
   final String name;
   final bool type;
