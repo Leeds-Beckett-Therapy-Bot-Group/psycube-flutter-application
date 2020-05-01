@@ -15,6 +15,7 @@ dependencies:
   bubble: ^1.1.9+1
   speech_to_text: ^2.1.0
   flutter_tts: ^1.0.0
+  flutter_dialogflow: ^0.1.0
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +27,7 @@ flutter:
 
   assets:
     - images/
+    - assets/
 
   # fonts:
   #   - family: Schyler
