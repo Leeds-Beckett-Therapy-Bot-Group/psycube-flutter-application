@@ -50,6 +50,15 @@ class NavigationDrawer extends StatelessWidget {
               Navigator.pushNamed(context, '/SettingsPage');
             },
           ),
+          NavTile(
+            barTitle: Text(
+                'About'
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/AboutPage');
+            },
+          ),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:therapyapp/screens/about_page.dart';
 import 'package:therapyapp/screens/chat_page.dart';
 import 'screens/home_page.dart';
 import 'constants.dart';
@@ -42,6 +43,7 @@ class Psycube extends StatelessWidget {
           '/ProfilePage': (context) => ProfilePage(),
           '/SettingsPage': (context) => SettingsPage(),
           '/NewTask': (context) => NewTask(),
+          '/AboutPage': (context) => AboutPage(),
         },
         home: Scaffold(
           body: SafeArea(
