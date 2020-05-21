@@ -16,6 +16,7 @@ dependencies:
   speech_to_text: ^2.1.0
   flutter_tts: ^1.0.0
   flutter_dialogflow: ^0.1.0
+  animated_text_kit: ^2.0.1
 
 dev_dependencies:
   flutter_test:
