@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "516870501783",
+    "firebase_url": "https://psycube-flutter.firebaseio.com",
+    "project_id": "psycube-flutter",
+    "storage_bucket": "psycube-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516870501783:android:0db607a6ca1302a071c0d2",
+        "android_client_info": {
+          "package_name": "com.psycube.therapyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516870501783-3br4aik2u2p6dhfm59p5g5316tu2gnla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsC4qBByekXkcIzWU5JHwNufWkPXHsWno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516870501783-3br4aik2u2p6dhfm59p5g5316tu2gnla.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
