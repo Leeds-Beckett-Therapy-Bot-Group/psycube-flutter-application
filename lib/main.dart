@@ -35,7 +35,7 @@ class Psycube extends StatelessWidget {
         theme: ThemeData(
           primaryColor: kPrimaryBlue,
           accentColor: Color(0xFFFFFFFF),
-          scaffoldBackgroundColor: kPrimaryBlue
+          scaffoldBackgroundColor: Colors.transparent,
         ),
         routes: {
           '/HomePage': (context) => Homepage(),
@@ -44,14 +44,24 @@ class Psycube extends StatelessWidget {
           '/SettingsPage': (context) => SettingsPage(),
           '/NewTask': (context) => NewTask(),
           '/AboutPage': (context) => AboutPage(),
-          '/SighUpPage': (context) => SignUpPage(),
+          '/SignUpPage': (context) => SignUpPage(),
           '/LoginPage': (context) => LoginPage(),
         },
-        home: Scaffold(
-          body: SafeArea(
-              child: Homepage()
+        home: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF005073), Color(0xFF71c7ec)],
+            ),
           ),
-        ));
+          child: Scaffold(
+            body: SafeArea(
+                child: LoginPage()
+            ),
+          ),
+        ),
+    );
   }
 }
 
