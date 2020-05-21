@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:therapyapp/screens/about_page.dart';
 import 'package:therapyapp/screens/chat_page.dart';
+import 'package:therapyapp/screens/login_page.dart';
+import 'package:therapyapp/screens/signup_page.dart';
 import 'screens/home_page.dart';
 import 'constants.dart';
 import 'screens/profile_page.dart';
@@ -12,9 +14,7 @@ void main() => runApp(Psycube());
 // git: https://github.com/Leeds-Beckett-Therapy-Bot-Group/psycube-flutter-application.git
 
 // todo: design profile page
-// todo: design chat page
 // todo: design settings page
-// todo: fix bottom nav bar
 // todo: make your own test branch - git checkout -b "your_branch_name"
 
 /// Personal reminder in case we need to delete:
@@ -44,6 +44,8 @@ class Psycube extends StatelessWidget {
           '/SettingsPage': (context) => SettingsPage(),
           '/NewTask': (context) => NewTask(),
           '/AboutPage': (context) => AboutPage(),
+          '/SighUpPage': (context) => SignUpPage(),
+          '/LoginPage': (context) => LoginPage(),
         },
         home: Scaffold(
           body: SafeArea(
