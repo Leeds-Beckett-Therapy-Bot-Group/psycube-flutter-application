@@ -17,6 +17,9 @@ dependencies:
   flutter_tts: ^1.0.0
   flutter_dialogflow: ^0.1.0
   animated_text_kit: ^2.0.1
+  cloud_firestore: ^0.13.5
+  firebase_auth: ^0.16.0
+  firebase_core: ^0.4.4+3
 
 dev_dependencies:
   flutter_test:
