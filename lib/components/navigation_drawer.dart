@@ -2,8 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:therapyapp/constants.dart';
 import 'package:therapyapp/screens/chat_page.dart';
 import 'package:therapyapp/screens/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class NavigationDrawer extends StatelessWidget {
+class NavigationDrawer extends StatefulWidget {
+  @override
+  _NavigationDrawerState createState() => _NavigationDrawerState();
+}
+
+class _NavigationDrawerState extends State<NavigationDrawer> {
+//create the auth object that contains the firebase current user details
+  final _auth = FirebaseAuth.instance;
+  FirebaseUser user;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initUser();
+  }
+  initUser() async {
+    user = await _auth.currentUser();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -12,11 +33,11 @@ class NavigationDrawer extends StatelessWidget {
         children: <Widget>[
           NavDrawHeader(
             accountName: Text(
-                'PsyCube Example',
+                "${user?.displayName}",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 )),
-            accountEmail: Text('psycube@gmail.com'),
+            accountEmail: Text("${user?.email}"),
           ),
           NavTile(
             barTitle: Text(
@@ -35,7 +56,7 @@ class NavigationDrawer extends StatelessWidget {
               }),
           NavTile(
             barTitle: Text(
-              'Profile'
+                'Profile'
             ),
             onTap: () {
               Navigator.pop(context);
@@ -44,7 +65,7 @@ class NavigationDrawer extends StatelessWidget {
           ),
           NavTile(
             barTitle: Text(
-              'Settings'
+                'Settings'
             ),
             onTap: () {
               Navigator.pushNamed(context, '/SettingsPage');
@@ -64,6 +85,7 @@ class NavigationDrawer extends StatelessWidget {
     );
   }
 }
+
 
 class NavDrawHeader extends StatelessWidget {
   NavDrawHeader({@required this.accountName, @required this.accountEmail});

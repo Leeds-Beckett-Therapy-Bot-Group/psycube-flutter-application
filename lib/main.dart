@@ -47,20 +47,7 @@ class Psycube extends StatelessWidget {
           '/SignUpPage': (context) => SignUpPage(),
           '/LoginPage': (context) => LoginPage(),
         },
-        home: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Color(0xFF005073), Color(0xFF71c7ec)],
-            ),
-          ),
-          child: Scaffold(
-            body: SafeArea(
-                child: LoginPage()
-            ),
-          ),
-        ),
+        home: LoginPage(),
     );
   }
 }
