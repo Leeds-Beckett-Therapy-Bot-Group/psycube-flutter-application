@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:therapyapp/constants.dart';
 import '../components/navigation_drawer.dart';
 import 'package:therapyapp/speech/dialogue_control.dart';
 import 'package:therapyapp/speech/speech_recognition.dart';
+import 'package:therapyapp/components/psycube_image.dart';
 
 class ChatBot extends StatefulWidget {
 
@@ -11,17 +14,11 @@ class ChatBot extends StatefulWidget {
 }
 
 class _ChatBotState extends State<ChatBot> {
+
   DialogueControl dialogueControl = DialogueControl();
   ChatMessages chatMessage = ChatMessages();
   SpeechRecognition speechNavBar = SpeechRecognition();
-
-  // variables for use in text to speech
-  String introText = 'Hey user, when you\'re ready, wake me up '
-                      'by pressing my on button';
-
-  String introText2 = 'Press play or say "Start" to begin a session. You can stop the session '
-                        'by pressing the Stop button or by saying "Stop" ';
-
+  Face psycubeAvatar = Face();
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +42,7 @@ class _ChatBotState extends State<ChatBot> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(35.0),
-                child: Image.asset('images/cube-placeholder.png'),
-              ),
-            ),
+            Face(), // components > psycube_image
             Expanded(
               child: Container(
                 width: double.infinity,

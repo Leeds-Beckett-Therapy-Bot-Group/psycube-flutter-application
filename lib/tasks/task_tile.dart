@@ -2,27 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:therapyapp/constants.dart';
 import 'task_manager.dart';
 
-
-enum Selection {
-  selected,
-  unselected
-}
-
-TaskManager taskManager = TaskManager();
-
 class TaskTile extends StatefulWidget {
   TaskTileUpdate createState() => TaskTileUpdate();
 }
 
 class TaskTileUpdate extends State<TaskTile> {
+  TaskManager taskManager = TaskManager();
 
-
-  Selection selection;
   int _defaultScore = 0;
   int _levelOne = 1000;
 
-
-
+  // buggy, should take default score , grab point variable from
+  // task_manager then add the two together, seems to be getting ran
+  // multiple times unnecessarily from the task tiles
   String addToTracker() {
       int point = taskManager.getTaskPoint(); // see task_manager for assigned points
       _defaultScore = _defaultScore + point;
