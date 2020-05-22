@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:therapyapp/components/navigation_drawer.dart';
 import 'package:therapyapp/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +29,23 @@ class _SettingsPageState extends State<SettingsPage> {
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [Color(0xFF005073), Color(0xFF71c7ec)])),
-      )
+                colors: [Color(0xFF005073), Color(0xFF71c7ec)]),
+        ),
+        child: Column(
+          children: <Widget>[
+            OutlineButton(
+                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+              child: Text(
+                'Log Out'
+              ),
+              onPressed: () {
+                  _auth.signOut();
+                  Navigator.pushNamed(context, '/LoginPage');
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

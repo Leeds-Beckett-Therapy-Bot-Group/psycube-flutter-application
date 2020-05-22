@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:therapyapp/constants.dart';
 import 'package:therapyapp/components/login_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -9,6 +10,10 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final _auth = FirebaseAuth.instance;
+  String email;
+  String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,8 +61,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 20,
                         ),
                         TextField(
+                          keyboardType: TextInputType.emailAddress,
+                          textAlign: TextAlign.center,
                           onChanged: (value) {
-                            //Do something with the user input.
+                            email = value;
                           },
                           decoration: kInputDecoration.copyWith(hintText:'Email'),
                         ),
@@ -65,15 +72,26 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 8.0,
                         ),
                         TextField(
+                          obscureText: true,
+                          textAlign: TextAlign.center,
                           onChanged: (value) {
-                            //Do something with the user input.
+                            password = value;
                           },
                           decoration: kInputDecoration.copyWith(hintText: 'Password'),
                         ),
                         LoginButton(
                           text: 'Confirm details',
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/ProfilePage');
+                          onPressed: () async {
+                            try {
+                              final NewUser = await _auth
+                                  .createUserWithEmailAndPassword(
+                                  email: email, password: password);
+                              if (NewUser != null) {
+                                Navigator.pushNamed(context, '/ProfilePage');
+                              }
+                            } catch(e) {
+                              print(e);
+                            }
                           },
                         ),
                       ],
@@ -86,7 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     LoginButton(
                       text: 'Already have an account? Log in here!',
                       onPressed: () {
-                        Navigator.pushNamed(context, '/SignUpPage');
+                        Navigator.pushNamed(context, '/LoginPage');
                       },
                     ),
                   ],
