@@ -12,25 +12,19 @@ class NavigationDrawer extends StatefulWidget {
 class _NavigationDrawerState extends State<NavigationDrawer> {
 //create the auth object that contains the firebase current user details
   final _auth = FirebaseAuth.instance;
-  FirebaseUser loggedInUser;
+  FirebaseUser user;
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    getCurrentUser();
+    initUser();
   }
-  //get the current users email address to display in nav header
-  getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser();
-      if (user != null) {
-        loggedInUser = user;
-        print(loggedInUser.email);
-      } }
-    catch(e) {
-      print(e);
-    }
+  initUser() async {
+    user = await _auth.currentUser();
+    setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -39,11 +33,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         children: <Widget>[
           NavDrawHeader(
             accountName: Text(
-                'PsyCube Example',
+                "${user?.displayName}",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 )),
-            accountEmail: Text('user email'),
+            accountEmail: Text("${user?.email}"),
           ),
           NavTile(
             barTitle: Text(

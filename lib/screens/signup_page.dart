@@ -13,6 +13,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final _auth = FirebaseAuth.instance;
   String email;
   String password;
+  String displayName;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +62,16 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 20,
                         ),
                         TextField(
+                          textAlign: TextAlign.center,
+                          onChanged: (value) {
+                            displayName = value;
+                          },
+                          decoration: kInputDecoration.copyWith(hintText:'First name'),
+                        ),
+                        SizedBox(
+                          height: 8.0,
+                        ),
+                        TextField(
                           keyboardType: TextInputType.emailAddress,
                           textAlign: TextAlign.center,
                           onChanged: (value) {
@@ -86,6 +97,12 @@ class _SignUpPageState extends State<SignUpPage> {
                               final NewUser = await _auth
                                   .createUserWithEmailAndPassword(
                                   email: email, password: password);
+                              FirebaseUser user = await _auth.currentUser();
+
+                              UserUpdateInfo updateInfo = UserUpdateInfo();
+                              updateInfo.displayName = displayName;
+                              user.updateProfile(updateInfo);
+                              print('USERNAME IS: ${user.displayName}');
                               if (NewUser != null) {
                                 Navigator.pushNamed(context, '/ProfilePage');
                               }
