@@ -38,180 +38,142 @@ class TaskManager {
 
   // needs slightly reformatting
 
- /* Task (
+    Task(
+    taskTitle: 'Pearly whites',
+    taskDescription: 'brush your teeth',
+    taskPoint: 10,
+    taskLevel: 1,
+    ),
 
-  taskTile: Pearly whites
-  taskDescription: brush your teeth
-  taskPoints: 10
-  taskLevel: 1
+    Task (
+    taskTitle: 'That wasn\'t how i left it',
+    taskDescription: 'Make your bed',
+    taskPoint: 10,
+    taskLevel: 1,
+    ),
 
-  ),
+    Task (
+    taskTitle: 'Some fresh Aqua',
+    taskDescription: 'Drink a glass of water',
+    taskPoint: 10,
+    taskLevel: 1,
+    ),
 
-  Task (
+    Task (
+    taskTitle: 'That\'ll wake ya up',
+    taskDescription: 'Wash your face',
+    taskPoint: 10,
+    taskLevel: 1,
+    ),
 
-  taskTile: That wasn't how i left it
-  taskDescription: Make your bed
-  taskPoints: 10
-  taskLevel: 1
+    Task (
+    taskTitle: 'Time for a munch munch crunch',
+    taskDescription: 'Eat some breakfast',
+    taskPoint: 10,
+    taskLevel: 1
+    ),
 
-  ),
+    Task (
+    taskTitle: 'must....resist....snooze....',
+    taskDescription: 'Wake up before 12pm',
+    taskPoint: 10,
+    taskLevel: 1,
+    ),
 
-  Task (
+    Task (
+    taskTitle: 'An apple a day....',
+    taskDescription: 'eat some fruit',
+    taskPoint: 10,
+    taskLevel: 1,
+    ),
 
-  taskTile: Some fresh Aqua
-  taskDescription: Drink a glass of water
-  taskPoints: 10
-  taskLevel: 1
+    Task (
+    taskTitle: 'lookin\' sharp',
+    taskDescription: 'get dressed',
+    taskPoint: 10,
+    taskLevel: 1
+    ),
 
-  ),
+    Task (
+    taskTitle: 'baby steps',
+    taskDescription: 'open your curtains/blinds and windows',
+    taskPoint: 10,
+    taskLevel: 1
+    ),
 
-  Task (
+    // Level 2
 
-  taskTile: That'll wake ya up
-  taskDescription: Wash your face
-  taskPoints: 10
-  taskLevel: 1
+    Task (
+    taskTitle: 'mmmmm simply delicious',
+    taskDescription: 'eat lunch',
+    taskPoint: 20,
+    taskLevel: 2
+    ),
 
-  ),
+    Task (
+    taskTitle: 'soak up some \'rays',
+    taskDescription: 'go outside on a walk for at least 15mins',
+    taskPoint: 20,
+    taskLevel: 2
+    ),
 
-  Task (
+    Task (
+    taskTitle: 'the early bird.....',
+    taskDescription: 'wake up before 11am',
+    taskPoint: 20,
+    taskLevel: 2
+    ),
 
-  taskTile: Time for a munch munch crunch
-  taskDescription: Eat some breakfast
-  taskPoints: 10
-  taskLevel: 1
+    Task (
+    taskTitle: 'dont scare the dog!',
+    taskDescription: 'hoover your room',
+    taskPoint: 20,
+    taskLevel: 2
+    ),
 
-  ),
+    Task (
+    taskTitle: 'Nice n Neat',
+    taskDescription: 'Tidy your room',
+    taskPoint: 20,
+    taskLevel: 2
+    ),
 
-  Task (
+    Task (
+    taskTitle: 'corner to corner',
+    taskDescription: 'change your bed sheets',
+    taskPoint: 20,
+    taskLevel: 2
+    ),
 
-  taskTile: must....resist....snooze....
-  taskDescription: Wake up before 12pm
-  taskPoints: 10
-  taskLevel: 1
+    Task (
+    taskTitle: 'nice and clean and fresh',
+    taskDescription: 'have a bath/shower',
+    taskPoint: 20,
+    taskLevel: 2
+    ),
 
-  ),
+    Task (
+    taskTitle: 'dont scare the dog and the cat!',
+    taskDescription: 'hoover your living room',
+    taskPoint: 20,
+    taskLevel: 2
+    ),
 
-  Task (
+    Task (
+    taskTitle: 'Productive buzz',
+    taskDescription: 'tidy your living room',
+    taskPoint: 20,
+    taskLevel: 2
+    ),
 
-  taskTile: An apple a day....
-  taskDescription: eat some fruit
-  taskPoints: 10
-  taskLevel: 1
+    Task (
+    taskTitle: 'Filling up',
+    taskDescription: 'Eat dinner/tea',
+    taskPoint: 20,
+    taskLevel: 2
+    ),
 
-  ),
-
-  Task (
-
-  taskTile: lookin' sharp
-  taskDescription: get dressed
-  taskPoints: 10
-  taskLevel: 1
-
-  ),
-
-  Task (
-
-  taskTile: baby steps
-  taskDescription: open your curtains/blinds and windows
-  taskPoints: 10
-  taskLevel: 1
-
-  ),
-
-  \\Level 2
-
-  Task (
-
-  taskTile: mmmmm simply delicious
-  taskDescription: eat lunch
-  taskPoints: 20
-  taskLevel: 2
-
-  ),
-
-  Task (
-
-  taskTile: soak up some 'rays
-  taskDescription: go outside on a walk for at least 15mins
-  taskPoints: 20
-  taskLevel: 2
-
-  ),
-
-  Task (
-
-  taskTile: the early bird.....
-  taskDescription: wake up before 11am
-  taskPoints: 20
-  taskLevel: 2
-
-  ),
-
-  Task (
-
-  taskTile: dont scare the dog!
-  taskDescription: hoover your room
-  taskPoints: 20
-  taskLevel: 2
-
-  ),
-
-  Task (
-
-  taskTile: Nice n Neat
-  taskDescription: Tidy your room
-  taskPoints: 20
-  taskLevel: 2
-
-  ),
-
-  Task (
-
-  taskTile: corner to corner
-  taskDescription: change your bed sheets
-  taskPoints: 20
-  taskLevel: 2
-
-  ),
-
-  Task (
-
-  taskTile: nice and clean and fresh
-  taskDescription: have a bath/shower
-  taskPoints: 20
-  taskLevel: 2
-
-  ),
-
-  Task (
-
-  taskTile: dont scare the dog and the cat!
-  taskDescription: hoover your living room
-  taskPoints: 20
-  taskLevel: 2
-
-  ),
-
-  Task (
-
-  taskTile: Productive buzz
-  taskDescription: tidy your living room
-  taskPoints: 20
-  taskLevel: 2
-
-  ),
-
-  Task (
-
-  taskTile: Filling up
-  taskDescription: Eat dinner/tea
-  taskPoints: 20
-  taskLevel: 2
-
-  ),
-
-//Level 3
+/*//Level 3
 
   Task (
 
@@ -761,9 +723,8 @@ class TaskManager {
   taskPoints: 80
   taskLevel: 8
 
-  ),
+  ),*/
 
-*/
   ];
 
   List<Task> _taskDataLevel2 = [
