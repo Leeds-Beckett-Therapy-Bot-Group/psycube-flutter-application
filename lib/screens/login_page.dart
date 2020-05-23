@@ -14,6 +14,21 @@ class _LoginPageState extends State<LoginPage> {
   final _auth = FirebaseAuth.instance;
   String email;
   String password;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loginHandler();
+  }
+
+  void loginHandler() async {
+    if (await FirebaseAuth.instance.currentUser() != null) {
+    // signed in
+      Navigator.pushReplacementNamed(context, '/ProfilePage');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
