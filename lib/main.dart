@@ -8,6 +8,7 @@ import 'constants.dart';
 import 'screens/profile_page.dart';
 import 'screens/settings_page.dart';
 import 'screens/newtask_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() => runApp(Psycube());
 

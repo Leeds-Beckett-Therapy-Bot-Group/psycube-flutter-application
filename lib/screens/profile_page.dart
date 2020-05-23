@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/navigation_drawer.dart';
 import 'package:therapyapp/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
