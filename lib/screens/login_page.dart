@@ -22,11 +22,13 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
   }
 
+  //checks if the user is logged in. if true, navigate to the profile page
   Future<bool> _initialLoginHandler() async {
     try {
       LoginModel loginModel = Provider.of<LoginModel>(context, listen: false);
       var currentUser = await FirebaseAuth.instance.currentUser();
       if (currentUser != null) {
+        //alls the populate user method from login model to apply user information across state
         loginModel.populateUser(currentUser);
         Navigator.pushReplacementNamed(context, '/ProfilePage');
         return true;
@@ -46,12 +48,14 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  //login method, to be called on the click of a button on the ui.
   _attemptLogin() async {
     try {
       var loginModel = Provider.of<LoginModel>(context, listen: false);
       final result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       if (result.user != null) {
+        //calls the populate user method from login model to apply user information across state
         loginModel.populateUser(result.user);
         Navigator.pushNamed(context, '/ProfilePage');
       } else {

@@ -34,11 +34,13 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         child: Column(
           children: <Widget>[
+            /// Zach - add new widgets in here to design the page. please don't delete any logout stuff it took me hours thx
             OutlineButton(
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(30.0)),
               child: Text('Log Out'),
               onPressed: () {
+                //remove the user information from state
                 Provider.of<LoginModel>(context, listen: false).removeUser();
                 _auth.signOut();
                 Navigator.pushNamed(context, '/LoginPage');
