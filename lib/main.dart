@@ -31,7 +31,10 @@ void main() => runApp(Psycube());
 class Psycube extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //for managing state
     return MultiProvider(
+
+      //create a provider of the login model (the state carries across the app)
       providers: [ChangeNotifierProvider(create: (context) => LoginModel())],
       child: MaterialApp(
           theme: ThemeData(

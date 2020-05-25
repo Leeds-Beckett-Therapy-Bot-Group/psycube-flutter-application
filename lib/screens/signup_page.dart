@@ -93,6 +93,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     LoginButton(
                       text: 'Confirm details',
+
+                      //create the user using variables from the textboxes (email password and display name String vars)
                       onPressed: () async {
                         try {
                           final newUser =
