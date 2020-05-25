@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:therapyapp/constants.dart';
 import '../components/navigation_drawer.dart';
@@ -7,6 +9,7 @@ import 'package:therapyapp/charts/db_handler.dart';
 import 'package:therapyapp/charts/happiness.dart';
 import 'package:provider/provider.dart';
 import 'package:therapyapp/user/login_model.dart';
+import 'package:therapyapp/components/psycube_image.dart';
 
 class ChatBot extends StatefulWidget {
 
@@ -15,6 +18,7 @@ class ChatBot extends StatefulWidget {
 }
 
 class _ChatBotState extends State<ChatBot> {
+
   DialogueControl dialogueControl = DialogueControl();
   ChatMessages chatMessage = ChatMessages();
   SpeechRecognition speechNavBar = SpeechRecognition();
@@ -27,6 +31,7 @@ class _ChatBotState extends State<ChatBot> {
   String introText2 = 'Press play or say "Start" to begin a session. You can stop the session '
                         'by pressing the Stop button or by saying "Stop" ';
 
+  Face psycubeAvatar = Face();
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +58,7 @@ class _ChatBotState extends State<ChatBot> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.all(35.0),
-                child: Image.asset('images/cube-placeholder.png'),
-              ),
-            ),
+            Face(), // components > psycube_image
             Expanded(
               child: Container(
                 width: double.infinity,
