@@ -28,6 +28,7 @@ class _SpeechRecognitionState extends State<SpeechRecognition> {
                 microphoneActive();
               },
           ),
+
           /*SpeechButton(
             icon: Icons.stop,
             onTap: speech.isListening ? stopListening : null,
@@ -36,6 +37,7 @@ class _SpeechRecognitionState extends State<SpeechRecognition> {
             icon: Icons.pause,
             onTap: speech.isListening ? cancelListening : null,
           ),*/
+
         ],
       ),
     );

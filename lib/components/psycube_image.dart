@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 class Face extends StatefulWidget {
   @override
   _FaceState createState() => _FaceState();
+
+  void externalGenerator() {
+    _FaceState().psycubeImageGenerator();
+  }
 }
 
 class _FaceState extends State<Face> {

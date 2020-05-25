@@ -6,19 +6,24 @@ class TaskTile extends StatefulWidget {
   TaskTileUpdate createState() => TaskTileUpdate();
 }
 
+/// tasks gets values from task_manager and adds them into task tiles
+/// updates point scores and should update progress bar in screens/home_page
 class TaskTileUpdate extends State<TaskTile> {
   TaskManager taskManager = TaskManager();
 
   int _defaultScore = 0;
+
+  // currently not in use?
   int _levelOne = 1000;
 
   // buggy, should take default score , grab point variable from
   // task_manager then add the two together, seems to be getting ran
-  // multiple times unnecessarily from the task tiles
+  // multiple times unnecessarily from the task tiles, in the terminal you should
+  // see the outputs getting printed and notice the problem
   String addToTracker() {
       int point = taskManager.getTaskPoint(); // see task_manager for assigned points
       _defaultScore = _defaultScore + point;
-      print(_defaultScore);
+      print(""+ _defaultScore.toString());
 
     return( _defaultScore.toString());
   }
@@ -40,6 +45,13 @@ class TaskTileUpdate extends State<TaskTile> {
         ),
 
         // todo: need implementing within a dynamic list
+
+        // leading gets task title from task_manager class
+        // title gets task descr from task_manager class
+        // trailing gets point value from task_manager class
+        // in task_manager these three values are randomzied within a function
+        // the issue with this is that all values are randomzied so task titles
+        // currently do not match with the relevant descriptions
         child: ListTile(
           leading: Text(taskManager.getTaskTitle(), style: kSecondaryText,),
           title: Text(taskManager.getTaskDescription(), style: kSecondaryText),
