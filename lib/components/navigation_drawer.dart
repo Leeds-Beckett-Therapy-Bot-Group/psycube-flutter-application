@@ -14,12 +14,16 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   final _auth = FirebaseAuth.instance;
   FirebaseUser user;
 
+  //method is called automatically
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
     initUser();
   }
+
+  //sets user to the current user information
   initUser() async {
     user = await _auth.currentUser();
     setState(() {});
@@ -33,10 +37,12 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         children: <Widget>[
           NavDrawHeader(
             accountName: Text(
+              //sets text to the string of users display name
                 "${user?.displayName}",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 )),
+            //sets text to the string of users email
             accountEmail: Text("${user?.email}"),
           ),
           NavTile(

@@ -8,6 +8,8 @@ import 'constants.dart';
 import 'screens/profile_page.dart';
 import 'screens/settings_page.dart';
 import 'screens/newtask_page.dart';
+import 'package:provider/provider.dart';
+import 'user/login_model.dart';
 
 void main() => runApp(Psycube());
 
@@ -26,28 +28,32 @@ void main() => runApp(Psycube());
 /// Requirements for ios: need to add permissions to
 /// info.plist - <key>NSMicrophoneUsageDescription</key>
 /// <key> NSSpeechRecognitionUsageDescription</key>
-
-
 class Psycube extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-          primaryColor: kPrimaryBlue,
-          accentColor: Color(0xFFFFFFFF),
-          scaffoldBackgroundColor: Colors.transparent,
-        ),
-        routes: {
-          '/HomePage': (context) => Homepage(),
-          '/ChatBot': (context) => ChatBot(),
-          '/ProfilePage': (context) => ProfilePage(),
-          '/SettingsPage': (context) => SettingsPage(),
-          '/NewTask': (context) => NewTask(),
-          '/AboutPage': (context) => AboutPage(),
-          '/SignUpPage': (context) => SignUpPage(),
-          '/LoginPage': (context) => LoginPage(),
-        },
-        home: LoginPage(),
+    //for managing state
+    return MultiProvider(
+
+      //create a provider of the login model (the state carries across the app)
+      providers: [ChangeNotifierProvider(create: (context) => LoginModel())],
+      child: MaterialApp(
+          theme: ThemeData(
+            primaryColor: kPrimaryBlue,
+            accentColor: Color(0xFFFFFFFF),
+            scaffoldBackgroundColor: Colors.transparent,
+          ),
+          routes: {
+            '/HomePage': (context) => Homepage(),
+            '/ChatBot': (context) => ChatBot(),
+            '/ProfilePage': (context) => ProfilePage(),
+            '/SettingsPage': (context) => SettingsPage(),
+            '/NewTask': (context) => NewTask(),
+            '/AboutPage': (context) => AboutPage(),
+            '/SignUpPage': (context) => SignUpPage(),
+            '/LoginPage': (context) => LoginPage(),
+          },
+          home: LoginPage(),
+      ),
     );
   }
 }
