@@ -7,7 +7,7 @@ class TaskTile extends StatefulWidget {
 }
 
 /// tasks gets values from task_manager and adds them into task tiles
-/// updates point scores and should update progress bar in screens/home_page
+/// updates point scores and should update progress bar in task_tracker
 class TaskTileUpdate extends State<TaskTile> {
   TaskManager taskManager = TaskManager();
 
@@ -16,10 +16,11 @@ class TaskTileUpdate extends State<TaskTile> {
   // currently not in use?
   int _levelOne = 1000;
 
-  // buggy, should take default score , grab point variable from
-  // task_manager then add the two together, seems to be getting ran
-  // multiple times unnecessarily from the task tiles, in the terminal you should
-  // see the outputs getting printed and notice the problem
+  /// buggy, should take default score , grab point variable from
+  /// task_manager then add the two together, seems to be getting ran
+  /// multiple times unnecessarily from the task tiles, in the terminal you should
+  /// see the outputs getting printed and notice the problem
+  /// check task_tracker for where the widget should get updated
   String addToTracker() {
       int point = taskManager.getTaskPoint(); // see task_manager for assigned points
       _defaultScore = _defaultScore + point;

@@ -14,7 +14,6 @@ class TrackerUpdate extends State<Tracker> {
   String percentUpdater = taskTileUpdate.addToTracker();
 
 
-
   @override
   Widget build(BuildContext context) {
     return CircularPercentIndicator(
