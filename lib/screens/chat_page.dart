@@ -3,6 +3,10 @@ import 'package:therapyapp/constants.dart';
 import '../components/navigation_drawer.dart';
 import 'package:therapyapp/speech/dialogue_control.dart';
 import 'package:therapyapp/speech/speech_recognition.dart';
+import 'package:therapyapp/charts/db_handler.dart';
+import 'package:therapyapp/charts/happiness.dart';
+import 'package:provider/provider.dart';
+import 'package:therapyapp/user/login_model.dart';
 
 class ChatBot extends StatefulWidget {
 
@@ -14,6 +18,7 @@ class _ChatBotState extends State<ChatBot> {
   DialogueControl dialogueControl = DialogueControl();
   ChatMessages chatMessage = ChatMessages();
   SpeechRecognition speechNavBar = SpeechRecognition();
+  double _sliderValue = 5.0;
 
   // variables for use in text to speech
   String introText = 'Hey user, when you\'re ready, wake me up '
@@ -60,15 +65,43 @@ class _ChatBotState extends State<ChatBot> {
                 child: DialogueControl()
               ),
             ),
+            Text("Happiness: ${_sliderValue.toInt()}/10",
+                style: TextStyle(color: Colors.black54, fontSize: 20)),
+            Slider(
+              onChanged: this._onSliderChange,
+              value: _sliderValue,
+              min: 0,
+              max: 10,
+              divisions: 10,
+            ),
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
               ),
               child: speechNavBar
             ),
+            Consumer<LoginModel>(
+              builder: (context, loginModel, child) => RaisedButton(
+                onPressed: () => this._submitValue(loginModel.user.uid),
+                child: Text("Submit"),
+              ),
+            )
           ],
         ),
       ),
     );
   }
+
+  void _onSliderChange(double newValue) {
+    setState(() {
+      _sliderValue = newValue;
+    });
+  }
+
+  void _submitValue(String uid) {
+    DBHandler dbManager = DBHandler(uid);
+    var happiness = Happiness(_sliderValue.toInt());
+    dbManager.writeHappiness(happiness);
+  }
+
 }
