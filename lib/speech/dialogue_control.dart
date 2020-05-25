@@ -7,6 +7,7 @@ import 'speech_recognition.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:therapyapp/components/psycube_image.dart';
 
 class DialogueControl extends StatefulWidget {
   DialogueControl({Key key, this.title, this.lastWords}) : super (key: key);
@@ -25,8 +26,10 @@ class DialogueControl extends StatefulWidget {
 
 class _DialogueControlState extends State<DialogueControl> {
 
+  Face psycubeImage = Face();
   SpeechRecognition speechRecognition = SpeechRecognition();
   FlutterTts flutterTts = FlutterTts();
+
   // variables for config voice emulation
   String language = 'en-AU-Standard-A';
   double volume = 1.5;
@@ -79,6 +82,10 @@ class _DialogueControlState extends State<DialogueControl> {
     /*return lastWords;*/
   }
 
+  void psycubeImageGenerator() {
+    psycubeImage.externalGenerator();
+  }
+
   // text composer widget which allows a user to type in the text box
   // and send to the bot
   Widget buildTextComposer() {
@@ -123,6 +130,7 @@ class _DialogueControlState extends State<DialogueControl> {
     setState(() {
       _messages.insert(0, message);
       _speak(message.text);
+      psycubeImageGenerator();
     });
   }
 
@@ -146,6 +154,7 @@ class _DialogueControlState extends State<DialogueControl> {
       _messages.insert(0, message);
     });
     response(text);
+    psycubeImageGenerator();
   }
 
   @override

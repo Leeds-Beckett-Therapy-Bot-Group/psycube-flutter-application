@@ -1,9 +1,11 @@
 import 'dart:math';
 import 'task.dart';
 
+/// class which defines tasks in list for use in task_tile
 class TaskManager {
 
-  // todo: add more tasks
+  // currently many tasks not in the right format commented out
+  // needs a lot of bullshit manual work to fix it
   List<Task> _taskDataLevel1 = [
     Task(
         taskTitle: 'Dish Master',
@@ -755,23 +757,32 @@ class TaskManager {
   ];
 
   // randomize integer within the bounds of the array length
+  // this is used to randomize title/description/point value
   int randomTaskNum() {
     int _taskNumber = _taskDataLevel1.length;
     return (new Random().nextInt(_taskNumber));
   }
 
+  /// gets taskTitle from taskDataLevel1 list
+  /// for use in task_tile class
   String getTaskTitle() {
     return _taskDataLevel1[randomTaskNum()].taskTitle;
   }
 
+  /// gets taskDescription from taskDataLevel1 list
+  /// for use in task_tile class
   String getTaskDescription() {
     return _taskDataLevel1[randomTaskNum()].taskDescription;
   }
 
+  /// gets taskPoint from taskDataLevel1 list
+  /// for use in task_tile classu
   int getTaskPoint() {
     return _taskDataLevel1[randomTaskNum()].taskPoint;
   }
 
+  /// gets taskLevel from taskData lists
+  /// currently not in use
   int getTaskLevel() {
     // todo: return task level and use it to only show certain tasks
     return 0;
