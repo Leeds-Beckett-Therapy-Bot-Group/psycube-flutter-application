@@ -3,6 +3,7 @@ import 'package:therapyapp/constants.dart';
 import 'package:therapyapp/components/login_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:therapyapp/user/user_auth.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -10,10 +11,17 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final _auth = FirebaseAuth.instance;
   String email;
   String password;
   String displayName;
+
+  _handleSignup() async {
+    var newUser = await UserAuth()
+        .createUserAndLogin(context, displayName, email, password);
+    if (newUser != null) {
+      Navigator.pushNamed(context, '/ProfilePage');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,26 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           kInputDecoration.copyWith(hintText: 'Password'),
                     ),
                     LoginButton(
-                      text: 'Confirm details',
-                      onPressed: () async {
-                        try {
-                          final newUser =
-                              await _auth.createUserWithEmailAndPassword(
-                                  email: email, password: password);
-                          FirebaseUser user = await _auth.currentUser();
-                          print(user);
-                          UserUpdateInfo updateInfo = UserUpdateInfo();
-                          updateInfo.displayName = displayName;
-                          user.updateProfile(updateInfo);
-                          print('USERNAME IS: ${user.displayName}');
-                          if (newUser != null) {
-                            Navigator.pushNamed(context, '/ProfilePage');
-                          }
-                        } catch (e) {
-                          print(e);
-                        }
-                      },
-                    ),
+                        text: 'Confirm details', onPressed: this._handleSignup),
                   ],
                 ),
               ),

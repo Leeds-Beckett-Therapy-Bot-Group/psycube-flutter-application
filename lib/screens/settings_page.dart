@@ -4,6 +4,7 @@ import 'package:therapyapp/components/navigation_drawer.dart';
 import 'package:therapyapp/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:therapyapp/user/login_model.dart';
+import 'package:therapyapp/user/user_auth.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -11,7 +12,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,9 +39,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   borderRadius: new BorderRadius.circular(30.0)),
               child: Text('Log Out'),
               onPressed: () {
-                Provider.of<LoginModel>(context, listen: false).removeUser();
-                _auth.signOut();
                 Navigator.pushNamed(context, '/LoginPage');
+                UserAuth().signOut(context);
               },
             ),
           ],
