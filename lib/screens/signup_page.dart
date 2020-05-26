@@ -129,6 +129,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
                           if (newUser != null) {
                             loginModel.populateUser(newUser.user);
+                            user.sendEmailVerification();
                             Navigator.pushReplacementNamed(context, '/ProfilePage');
                           }
                         } catch(e) {
