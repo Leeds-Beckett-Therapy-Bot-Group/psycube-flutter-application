@@ -36,6 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
     //sets the uid var to the value of the users uid as the page is initiated, to be used for reading and writing to database
     var uid = Provider.of<LoginModel>(context, listen: false).user.uid;
+    initUser();
 
     //passing the uid over to the syncdata method
     this._syncDataFuture = this._syncData(uid);
@@ -61,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [Color(0xFF005073), Color(0xFF71c7ec)])),
+                    colors: [Color(0xFF499CD8), Color(0xFF55C5A6)])),
 
             //this is a ternary operator. If this is true, show the graphs. if not true, show a loading screen.
             child: Consumer<LoginModel>(
@@ -105,18 +106,30 @@ class _ProfilePageState extends State<ProfilePage> {
                                 child: Padding(
                                     padding: EdgeInsets.all(50),
                                     child: Center(
-                                      child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            Padding(
-                                                padding:
-                                                    EdgeInsets.only(right: 25),
-                                                child:
-                                                    CircularProgressIndicator()),
-                                            Text("Loading Charts",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(fontSize: 20))
-                                          ]),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Text('Hey ${user.displayName}! Look at the graph below to compare your mood on different days',
+                                              style: kProfilePageText,
+                                              textAlign: TextAlign.center),
+                                          //putting the chart into a container - container must
+                                          // have the height hard coded or the graph doesn't show up
+                                          SizedBox(
+                                            height: 100,
+                                          ),
+                                          Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: <Widget>[
+                                                Padding(
+                                                    padding:
+                                                        EdgeInsets.only(right: 25),
+                                                    child:
+                                                        CircularProgressIndicator()),
+                                                Text("Loading Graph...",
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(fontSize: 20))
+                                              ]),
+                                        ],
+                                      ),
                                     )))))));
   }
 

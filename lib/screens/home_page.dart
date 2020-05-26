@@ -24,22 +24,23 @@ class _HomepageState extends State<Homepage> {
           color: Colors.white,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/NewTask');
-        },
-        backgroundColor: Color(0xFF107dac),
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-      ),
+        /// add the new task page if we have time, if not we don't really need it anyway
+//      floatingActionButton: FloatingActionButton(
+//        onPressed: () {
+//          Navigator.pushReplacementNamed(context, '/NewTask');
+//        },
+//        backgroundColor: Color(0xFF107dac),
+//        child: Icon(
+//          Icons.add,
+//          color: Colors.white,
+//        ),
+//      ),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [Color(0xFF005073), Color(0xFF71c7ec)])),
+                colors: [Color(0xFF499CD8), Color(0xFF55C5A6)])),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

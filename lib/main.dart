@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:therapyapp/screens/about_page.dart';
+import 'package:therapyapp/screens/changepassword_page.dart';
 import 'package:therapyapp/screens/chat_page.dart';
 import 'package:therapyapp/screens/login_page.dart';
 import 'package:therapyapp/screens/signup_page.dart';
@@ -51,6 +52,7 @@ class Psycube extends StatelessWidget {
             '/AboutPage': (context) => AboutPage(),
             '/SignUpPage': (context) => SignUpPage(),
             '/LoginPage': (context) => LoginPage(),
+            '/ChangePasswordPage': (context) => ChangePasswordPage(),
           },
           home: LoginPage(),
       ),

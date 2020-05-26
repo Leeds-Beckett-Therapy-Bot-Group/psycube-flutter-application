@@ -52,7 +52,7 @@ class _ChatBotState extends State<ChatBot> {
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [Color(0xFF005073), Color(0xFF71c7ec)])
+                colors: [Color(0xFF499CD8), Color(0xFF55C5A6)])
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
