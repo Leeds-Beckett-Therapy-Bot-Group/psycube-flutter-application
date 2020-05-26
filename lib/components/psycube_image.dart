@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 
@@ -16,10 +15,10 @@ class _FaceState extends State<Face> {
   int randNumber = 0;
 
   void psycubeImageGenerator() async {
-      setState(() {
-        randNumber = Random().nextInt(6);
-        print(randNumber);
-      });
+    setState(() {
+      randNumber = Random().nextInt(6);
+      print(randNumber);
+    });
   }
 
   @override
@@ -27,7 +26,7 @@ class _FaceState extends State<Face> {
     return Expanded(
       child: FlatButton(
         onPressed: () {
-            psycubeImageGenerator();
+          psycubeImageGenerator();
         },
         child: Container(
           padding: EdgeInsets.all(35.0),

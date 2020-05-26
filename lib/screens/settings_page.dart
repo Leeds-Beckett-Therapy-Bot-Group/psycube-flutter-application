@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:therapyapp/components/navigation_drawer.dart';
 import 'package:therapyapp/constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:therapyapp/user/login_model.dart';
 import 'package:therapyapp/user/user_auth.dart';
 
 class SettingsPage extends StatefulWidget {

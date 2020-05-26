@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:therapyapp/components/navigation_drawer.dart';
 import 'package:therapyapp/constants.dart';
 
 class NewTask extends StatefulWidget {
@@ -12,15 +11,14 @@ class _NewTaskState extends State<NewTask> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'PsyCube',
-          style: kHeaderText,
-        ),
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-          backgroundColor: Color(0xFF107dac)
-      ),
+          title: Text(
+            'PsyCube',
+            style: kHeaderText,
+          ),
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+          backgroundColor: Color(0xFF107dac)),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:therapyapp/constants.dart';
 import '../components/navigation_drawer.dart';
@@ -12,13 +10,11 @@ import 'package:therapyapp/user/login_model.dart';
 import 'package:therapyapp/components/psycube_image.dart';
 
 class ChatBot extends StatefulWidget {
-
   @override
   _ChatBotState createState() => _ChatBotState();
 }
 
 class _ChatBotState extends State<ChatBot> {
-
   DialogueControl dialogueControl = DialogueControl();
   ChatMessages chatMessage = ChatMessages();
   SpeechRecognition speechNavBar = SpeechRecognition();
@@ -26,10 +22,11 @@ class _ChatBotState extends State<ChatBot> {
 
   // variables for use in text to speech
   String introText = 'Hey user, when you\'re ready, wake me up '
-                      'by pressing my on button';
+      'by pressing my on button';
 
-  String introText2 = 'Press play or say "Start" to begin a session. You can stop the session '
-                        'by pressing the Stop button or by saying "Stop" ';
+  String introText2 =
+      'Press play or say "Start" to begin a session. You can stop the session '
+      'by pressing the Stop button or by saying "Stop" ';
 
   Face psycubeAvatar = Face();
 
@@ -52,18 +49,15 @@ class _ChatBotState extends State<ChatBot> {
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [Color(0xFF499CD8), Color(0xFF55C5A6)])
-        ),
+                colors: [Color(0xFF499CD8), Color(0xFF55C5A6)])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Face(), // components > psycube_image
             Expanded(
-              child: Container(
-                width: double.infinity,
-                child: DialogueControl()
-              ),
+              child:
+                  Container(width: double.infinity, child: DialogueControl()),
             ),
             Text("Happiness: ${_sliderValue.toInt()}/10",
                 style: TextStyle(color: Colors.black54, fontSize: 20)),
@@ -75,11 +69,10 @@ class _ChatBotState extends State<ChatBot> {
               divisions: 10,
             ),
             Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-              child: speechNavBar
-            ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: speechNavBar),
             Consumer<LoginModel>(
               builder: (context, loginModel, child) => RaisedButton(
                 onPressed: () => this._submitValue(loginModel.user.uid),
@@ -103,5 +96,4 @@ class _ChatBotState extends State<ChatBot> {
     var happiness = Happiness(_sliderValue.toInt());
     dbManager.writeHappiness(happiness);
   }
-
 }
