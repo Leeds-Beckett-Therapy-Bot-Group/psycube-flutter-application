@@ -10,15 +10,57 @@ class Face extends StatefulWidget {
   }
 }
 
-class _FaceState extends State<Face> {
+class _FaceState extends State<Face> with TickerProviderStateMixin {
   int i;
   int randNumber = 0;
 
   void psycubeImageGenerator() async {
     setState(() {
       randNumber = Random().nextInt(6);
-      print(randNumber);
     });
+  }
+
+  AnimationController motionController;
+  Animation motionAnimation;
+  double size = 20;
+
+  void initState() {
+    super.initState();
+
+    motionController = AnimationController(
+      duration: Duration(seconds: 1),
+      vsync: this,
+      lowerBound: 0.5,
+    );
+
+    motionAnimation = CurvedAnimation(
+      parent: motionController,
+      curve: Curves.ease,
+    );
+
+    motionController.forward();
+    motionController.addStatusListener((status) {
+      setState(() {
+        if (status == AnimationStatus.completed) {
+          motionController.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          motionController.forward();
+        }
+      });
+    });
+
+    motionController.addListener(() {
+      setState(() {
+        size = motionController.value * 250;
+      });
+    });
+    // motionController.repeat();
+  }
+
+  @override
+  void dispose() {
+    motionController.dispose();
+    super.dispose();
   }
 
   @override
@@ -29,6 +71,7 @@ class _FaceState extends State<Face> {
           psycubeImageGenerator();
         },
         child: Container(
+          // height: size,
           padding: EdgeInsets.all(35.0),
           child: Image.asset('images/psycube_$randNumber.png'),
         ),

@@ -10,7 +10,6 @@ class Tracker extends StatefulWidget {
 }
 
 class TrackerUpdate extends State<Tracker> {
-
   String percentUpdater = taskTileUpdate.addToTracker();
 
   /// function which formats value from addToTracker into a suitable

@@ -1,3 +1,4 @@
+import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:therapyapp/constants.dart';
 import '../components/navigation_drawer.dart';
@@ -19,16 +20,12 @@ class _ChatBotState extends State<ChatBot> {
   ChatMessages chatMessage = ChatMessages();
   SpeechRecognition speechNavBar = SpeechRecognition();
   double _sliderValue = 5.0;
-
-  // variables for use in text to speech
-  String introText = 'Hey user, when you\'re ready, wake me up '
-      'by pressing my on button';
-
-  String introText2 =
-      'Press play or say "Start" to begin a session. You can stop the session '
-      'by pressing the Stop button or by saying "Stop" ';
-
   Face psycubeAvatar = Face();
+
+  void playSound() {
+    final player = AudioCache();
+    player.play('task_complete.mp3'); // audio should always be in an 'assets' folder
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +56,13 @@ class _ChatBotState extends State<ChatBot> {
               child:
                   Container(width: double.infinity, child: DialogueControl()),
             ),
+            Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: speechNavBar),
             Text("Happiness: ${_sliderValue.toInt()}/10",
-                style: TextStyle(color: Colors.black54, fontSize: 20)),
+                style: kSecondaryText),
             Slider(
               onChanged: this._onSliderChange,
               value: _sliderValue,
@@ -68,14 +70,12 @@ class _ChatBotState extends State<ChatBot> {
               max: 10,
               divisions: 10,
             ),
-            Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                ),
-                child: speechNavBar),
             Consumer<LoginModel>(
               builder: (context, loginModel, child) => RaisedButton(
-                onPressed: () => this._submitValue(loginModel.user.uid),
+                onPressed: () {
+                  this._submitValue(loginModel.user.uid);
+                  playSound();
+                } ,
                 child: Text("Submit"),
               ),
             )
