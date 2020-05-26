@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:therapyapp/constants.dart';
 import 'task_manager.dart';
+import 'package:audioplayers/audio_cache.dart';
+
 
 class TaskTile extends StatefulWidget {
   TaskTileUpdate createState() => TaskTileUpdate();
@@ -28,12 +30,18 @@ class TaskTileUpdate extends State<TaskTile> {
     return( _defaultScore.toString());
   }
 
+  void playSound() {
+    final player = AudioCache();
+    player.play('task_complete.mp3'); // audio should always be in an 'assets' folder
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         setState(() {
           addToTracker();
+          playSound();
         });
       },
 
