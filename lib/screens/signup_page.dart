@@ -3,6 +3,8 @@ import 'package:therapyapp/constants.dart';
 import 'package:therapyapp/components/login_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:therapyapp/user/login_model.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -13,7 +15,14 @@ class _SignUpPageState extends State<SignUpPage> {
   final _auth = FirebaseAuth.instance;
   String email;
   String password;
+  String confirmPassword;
   String displayName;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF005073), Color(0xFF71c7ec)],
+          colors: [Color(0xFF499CD8), Color(0xFF55C5A6)],
         ),
       ),
       child: Padding(
@@ -91,28 +100,58 @@ class _SignUpPageState extends State<SignUpPage> {
                       decoration:
                           kInputDecoration.copyWith(hintText: 'Password'),
                     ),
+                    SizedBox(
+                      height: 8.0,
+                    ),
+                    TextField(
+                      obscureText: true,
+                      textAlign: TextAlign.center,
+                      onChanged: (value) {
+                        confirmPassword = value;
+                      },
+                      decoration:
+                      kInputDecoration.copyWith(hintText: 'Confirm Password'),
+                    ),
                     LoginButton(
                       text: 'Confirm details',
 
                       //create the user using variables from the textboxes (email password and display name String vars)
                       onPressed: () async {
                         try {
-                          final newUser =
-                              await _auth.createUserWithEmailAndPassword(
-                                  email: email, password: password);
+                          var loginModel = Provider.of<LoginModel>(context, listen: false);
+                          final newUser = await _auth.createUserWithEmailAndPassword(
+                              email: email, password: password);
+
                           FirebaseUser user = await _auth.currentUser();
-                          print(user);
                           UserUpdateInfo updateInfo = UserUpdateInfo();
                           updateInfo.displayName = displayName;
                           user.updateProfile(updateInfo);
-                          print('USERNAME IS: ${user.displayName}');
+
                           if (newUser != null) {
-                            Navigator.pushNamed(context, '/ProfilePage');
+                            loginModel.populateUser(newUser.user);
+                            Navigator.pushReplacementNamed(context, '/ProfilePage');
                           }
-                        } catch (e) {
+                        } catch(e) {
                           print(e);
                         }
-                      },
+                      }
+//                        try {
+//                          final newUser =
+//                              await _auth.createUserWithEmailAndPassword(
+//                                  email: email, password: password);
+//
+//                          FirebaseUser user = await _auth.currentUser();
+//                          UserUpdateInfo updateInfo = UserUpdateInfo();
+//                          updateInfo.displayName = displayName;
+//                          user.updateProfile(updateInfo);
+//                          if (newUser != null) {
+//
+//                            Navigator.pushReplacementNamed(context, '/ProfilePage');
+//                          }
+//                        } catch (e) {
+//                          print(e);
+//                        }
+//                      },
                     ),
                   ],
                 ),

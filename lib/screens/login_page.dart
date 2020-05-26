@@ -5,6 +5,7 @@ import 'package:therapyapp/constants.dart';
 import 'package:therapyapp/components/login_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:therapyapp/user/login_model.dart';
+import 'package:getflutter/getflutter.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -57,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
       if (result.user != null) {
         //calls the populate user method from login model to apply user information across state
         loginModel.populateUser(result.user);
-        Navigator.pushNamed(context, '/ProfilePage');
+        Navigator.pushReplacementNamed(context, '/ProfilePage');
       } else {
         throw FlutterError("User provided was null");
       }
@@ -65,7 +66,6 @@ class _LoginPageState extends State<LoginPage> {
       print(e);
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
         gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFF005073), Color(0xFF71c7ec)]),
+            colors: [Color(0xFF499CD8), Color(0xFF55C5A6)]),
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),

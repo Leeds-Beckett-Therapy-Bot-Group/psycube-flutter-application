@@ -30,7 +30,7 @@ class _SettingsPageState extends State<SettingsPage> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [Color(0xFF005073), Color(0xFF71c7ec)]),
+              colors: [Color(0xFF499CD8), Color(0xFF55C5A6)]),
         ),
         child: Column(
           children: <Widget>[
@@ -43,7 +43,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 //remove the user information from state
                 Provider.of<LoginModel>(context, listen: false).removeUser();
                 _auth.signOut();
-                Navigator.pushNamed(context, '/LoginPage');
+                Navigator.pushReplacementNamed(context, '/LoginPage');
               },
             ),
           ],
