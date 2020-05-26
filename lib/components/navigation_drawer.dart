@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:therapyapp/constants.dart';
+import 'package:therapyapp/screens/chat_page.dart';
+import 'package:therapyapp/screens/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
-import 'package:therapyapp/user/login_model.dart';
 
 class NavigationDrawer extends StatefulWidget {
   @override
@@ -9,20 +10,31 @@ class NavigationDrawer extends StatefulWidget {
 }
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
+//create the auth object that contains the firebase current user details
+  final _auth = FirebaseAuth.instance;
+  FirebaseUser user;
+
+  //method is called automatically
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    initUser();
+  }
+
+  //sets user to the current user information
+  initUser() async {
+    user = await _auth.currentUser();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          Consumer<LoginModel>(
-              builder: (context, loginModel, child) => NavDrawHeader(
-                    accountName: Text("${loginModel.user?.displayName}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        )),
-                    accountEmail: Text("${loginModel.user?.email}"),
-                  )),
           NavDrawHeader(
             accountName: Text(
               //sets text to the string of users display name
@@ -49,20 +61,26 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 Navigator.pushNamed(context, '/ChatBot');
               }),
           NavTile(
-            barTitle: Text('Profile'),
+            barTitle: Text(
+                'Profile'
+            ),
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/ProfilePage');
             },
           ),
           NavTile(
-            barTitle: Text('Settings'),
+            barTitle: Text(
+                'Settings'
+            ),
             onTap: () {
               Navigator.pushNamed(context, '/SettingsPage');
             },
           ),
           NavTile(
-            barTitle: Text('About'),
+            barTitle: Text(
+                'About'
+            ),
             onTap: () {
               Navigator.pop(context);
               Navigator.pushNamed(context, '/AboutPage');
@@ -73,6 +91,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
     );
   }
 }
+
 
 class NavDrawHeader extends StatelessWidget {
   NavDrawHeader({@required this.accountName, @required this.accountEmail});
@@ -86,10 +105,13 @@ class NavDrawHeader extends StatelessWidget {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [Color(0xFF005073), Color(0xFF71c7ec)])),
-      child:
-          Column(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
-        Row(children: <Widget>[
+              colors: [Color(0xFF005073), Color(0xFF71c7ec)])
+      ),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+        Row(
+            children: <Widget>[
           CircleAvatar(
             radius: 40,
             backgroundImage: AssetImage('images/avatar.png'),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:provider/provider.dart';
 import 'package:therapyapp/constants.dart';
 import 'package:therapyapp/components/login_button.dart';
-import 'package:therapyapp/user/user_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:therapyapp/user/login_model.dart';
+import 'package:getflutter/getflutter.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,18 +13,33 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _auth = FirebaseAuth.instance;
   Future<bool> _initialLoginFuture;
   String email;
   String password;
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  //checks if the user is logged in. if true, navigate to the profile page
   Future<bool> _initialLoginHandler() async {
-    var currentUser = await UserAuth().checkLoggedIn(context);
-    if (currentUser != null) {
-      Navigator.pushReplacementNamed(context, '/ProfilePage');
-      return true;
+    try {
+      LoginModel loginModel = Provider.of<LoginModel>(context, listen: false);
+      var currentUser = await FirebaseAuth.instance.currentUser();
+      if (currentUser != null) {
+        //alls the populate user method from login model to apply user information across state
+        loginModel.populateUser(currentUser);
+        Navigator.pushReplacementNamed(context, '/ProfilePage');
+        return true;
+      }
+      // Not Logged In
+      return false;
+    } catch (error) {
+      print(error);
+      return false;
     }
-    // Not Logged In
-    return false;
   }
 
   void didChangeDependencies() {
@@ -33,14 +51,21 @@ class _LoginPageState extends State<LoginPage> {
 
   //login method, to be called on the click of a button on the ui.
   _attemptLogin() async {
-    var user = await UserAuth().loginUser(context, email, password);
-    if (user != null) {
-      Navigator.pushNamed(context, '/ProfilePage');
-    } else {
-      throw FlutterError("User provided was null");
+    try {
+      var loginModel = Provider.of<LoginModel>(context, listen: false);
+      final result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      if (result.user != null) {
+        //calls the populate user method from login model to apply user information across state
+        loginModel.populateUser(result.user);
+        Navigator.pushReplacementNamed(context, '/ProfilePage');
+      } else {
+        throw FlutterError("User provided was null");
+      }
+    } catch (e) {
+      print(e);
     }
   }
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
