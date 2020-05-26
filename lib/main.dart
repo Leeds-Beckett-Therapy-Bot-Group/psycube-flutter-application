@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:therapyapp/screens/about_page.dart';
+import 'package:therapyapp/screens/changepassword_page.dart';
 import 'package:therapyapp/screens/chat_page.dart';
 import 'package:therapyapp/screens/login_page.dart';
 import 'package:therapyapp/screens/signup_page.dart';
@@ -31,7 +32,10 @@ void main() => runApp(Psycube());
 class Psycube extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //for managing state
     return MultiProvider(
+
+      //create a provider of the login model (the state carries across the app)
       providers: [ChangeNotifierProvider(create: (context) => LoginModel())],
       child: MaterialApp(
           theme: ThemeData(
@@ -48,6 +52,7 @@ class Psycube extends StatelessWidget {
             '/AboutPage': (context) => AboutPage(),
             '/SignUpPage': (context) => SignUpPage(),
             '/LoginPage': (context) => LoginPage(),
+            '/ChangePasswordPage': (context) => ChangePasswordPage(),
           },
           home: LoginPage(),
       ),

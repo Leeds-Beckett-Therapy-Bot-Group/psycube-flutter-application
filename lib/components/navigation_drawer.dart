@@ -23,6 +23,16 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                         )),
                     accountEmail: Text("${loginModel.user?.email}"),
                   )),
+          NavDrawHeader(
+            accountName: Text(
+              //sets text to the string of users display name
+                "${user?.displayName}",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                )),
+            //sets text to the string of users email
+            accountEmail: Text("${user?.email}"),
+          ),
           NavTile(
             barTitle: Text(
               'Home',

@@ -30,10 +30,11 @@ class _SettingsPageState extends State<SettingsPage> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [Color(0xFF005073), Color(0xFF71c7ec)]),
+              colors: [Color(0xFF499CD8), Color(0xFF55C5A6)]),
         ),
         child: Column(
           children: <Widget>[
+            /// Zach - add new widgets in here to design the page. please don't delete any logout stuff it took me hours thx
             OutlineButton(
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(30.0)),

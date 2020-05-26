@@ -13,6 +13,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   String email;
   String password;
+  String confirmPassword;
   String displayName;
 
   _handleSignup() async {
@@ -24,6 +25,12 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
@@ -31,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF005073), Color(0xFF71c7ec)],
+          colors: [Color(0xFF499CD8), Color(0xFF55C5A6)],
         ),
       ),
       child: Padding(
@@ -98,6 +105,18 @@ class _SignUpPageState extends State<SignUpPage> {
                       },
                       decoration:
                           kInputDecoration.copyWith(hintText: 'Password'),
+                    ),
+                    SizedBox(
+                      height: 8.0,
+                    ),
+                    TextField(
+                      obscureText: true,
+                      textAlign: TextAlign.center,
+                      onChanged: (value) {
+                        confirmPassword = value;
+                      },
+                      decoration:
+                      kInputDecoration.copyWith(hintText: 'Confirm Password'),
                     ),
                     LoginButton(
                         text: 'Confirm details', onPressed: this._handleSignup),

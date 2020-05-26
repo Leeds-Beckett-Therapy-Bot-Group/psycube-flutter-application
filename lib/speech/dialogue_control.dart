@@ -4,31 +4,90 @@ import 'package:bubble/bubble.dart';
 import 'package:therapyapp/constants.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'speech_recognition.dart';
-
+import 'package:speech_to_text/speech_recognition_error.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:therapyapp/components/psycube_image.dart';
 
 class DialogueControl extends StatefulWidget {
-  DialogueControl({Key key, this.title}) : super (key: key);
+  DialogueControl({Key key, this.title, this.lastWords}) : super (key: key);
 
   final String title;
+  final String lastWords;
 
   @override
   _DialogueControlState createState() => _DialogueControlState();
+
+  void speechToText() {
+    _DialogueControlState().sTT();
+  }
+
 }
 
 class _DialogueControlState extends State<DialogueControl> {
 
+  Face psycubeImage = Face();
   SpeechRecognition speechRecognition = SpeechRecognition();
   FlutterTts flutterTts = FlutterTts();
 
+  // variables for config voice emulation
   String language = 'en-AU-Standard-A';
   double volume = 1.5;
   double pitch = 1.4;
   double rate = 1.25;
+  double pitchTest = 0.5;
+
+  // variables for config in speech to text
+  double level = 0.0;
+  String lastWords = "";
+  String lastError = "";
+  String lastStatus = "";
 
   // instantiate chatMessage list , an array which contains the conversation
   final List<ChatMessages> _messages = <ChatMessages>[];
   final TextEditingController _textController = TextEditingController();
 
+  // listens for user speech and disengages when break of silence
+  // first time may need user permission
+  // ignore: missing_return
+  Future<String> sTT() async {
+    stt.SpeechToText speech = stt.SpeechToText();
+    bool available = await speech.initialize(onStatus: statusListener, onError: errorListener);
+    if (available) {
+      speech.listen(onResult: getResultListener);
+    }
+    else {
+      print("The user has denied the use of speech recognition.");
+    }
+  }
+  void errorListener(SpeechRecognitionError error) {
+    setState(() {
+      lastError = "${error.errorMsg} - ${error.permanent}";
+    });
+  }
+
+  // outputs true or false reading on deciphered text
+  void statusListener(String status) {
+    setState(() {
+      lastStatus = "$status";
+    });
+  }
+
+  // returns user text deciphered from speech
+  void getResultListener(SpeechRecognitionResult result) {
+    setState(() {
+      lastWords = "${result.recognizedWords}"; //  - ${result.finalResult} (debugging status)
+    });
+    print (lastWords);
+    /*return lastWords;*/
+  }
+
+  void psycubeImageGenerator() {
+    psycubeImage.externalGenerator();
+  }
+
+  // text composer widget which allows a user to type in the text box
+  // and send to the bot
   Widget buildTextComposer() {
     return IconTheme(
       data: IconThemeData(color: Theme.of(context).accentColor),
@@ -41,7 +100,7 @@ class _DialogueControlState extends State<DialogueControl> {
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
                 decoration:
-                InputDecoration.collapsed(hintText: "Send a message"),
+                InputDecoration.collapsed(hintText: "Send a message or press the mic"),
               ),
             ),
             Container(
@@ -56,6 +115,8 @@ class _DialogueControlState extends State<DialogueControl> {
     );
   }
 
+  // fetches user responses and sends data to dialogFlow to be processed
+  // inserts bot response into message box
   void response(query) async {
     _textController.clear();
     AuthGoogle authGoogle = await AuthGoogle(fileJson: "assets/credentials.json").build();
@@ -69,12 +130,14 @@ class _DialogueControlState extends State<DialogueControl> {
     setState(() {
       _messages.insert(0, message);
       _speak(message.text);
+      psycubeImageGenerator();
     });
   }
 
+  // takes input text from response func and plays back voice
   Future _speak(String text) async {
       await flutterTts.setVolume(volume);
-      await flutterTts.setPitch(pitch);
+      await flutterTts.setPitch(pitchTest);
       await flutterTts.setSpeechRate(rate);
       await flutterTts.setLanguage(language);
       await flutterTts.speak(text);
@@ -91,6 +154,7 @@ class _DialogueControlState extends State<DialogueControl> {
       _messages.insert(0, message);
     });
     response(text);
+    psycubeImageGenerator();
   }
 
   @override
@@ -112,12 +176,14 @@ class _DialogueControlState extends State<DialogueControl> {
   }
 }
 
+// text bubble widgets
+// need to take text input from stt or textComposer
 class ChatMessages extends StatelessWidget {
-  ChatMessages({this.text, this.name, this.type, this.speechRecognition});
+  ChatMessages({this.text, this.name, this.type, this.lastWords});
 
-  final String speechRecognition;
   final String text;
   final String name;
+  final String lastWords;
   final bool type;
 
   List<Widget> otherMessage(context) {
@@ -157,7 +223,7 @@ class ChatMessages extends StatelessWidget {
               Text(this.name, style: kChatBotText),
               Container(
                 margin: const EdgeInsets.only(top: 5.0),
-                child: Text(text),
+                child: Text(text), // or change to text for txt msg or lastWords for voice
               ),
             ],
           ),
