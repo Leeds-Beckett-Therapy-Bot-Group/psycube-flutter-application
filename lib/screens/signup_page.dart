@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:therapyapp/constants.dart';
 import 'package:therapyapp/components/login_button.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:therapyapp/user/user_auth.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -22,12 +21,6 @@ class _SignUpPageState extends State<SignUpPage> {
     if (newUser != null) {
       Navigator.pushNamed(context, '/ProfilePage');
     }
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
   }
 
   @override
@@ -115,8 +108,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       onChanged: (value) {
                         confirmPassword = value;
                       },
-                      decoration:
-                      kInputDecoration.copyWith(hintText: 'Confirm Password'),
+                      decoration: kInputDecoration.copyWith(
+                          hintText: 'Confirm Password'),
                     ),
                     LoginButton(
                         text: 'Confirm details', onPressed: this._handleSignup),

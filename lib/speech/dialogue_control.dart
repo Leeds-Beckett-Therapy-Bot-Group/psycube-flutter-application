@@ -1,3 +1,4 @@
+import "dart:async";
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:bubble/bubble.dart';
@@ -10,7 +11,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:therapyapp/components/psycube_image.dart';
 
 class DialogueControl extends StatefulWidget {
-  DialogueControl({Key key, this.title, this.lastWords}) : super (key: key);
+  DialogueControl({Key key, this.title, this.lastWords}) : super(key: key);
 
   final String title;
   final String lastWords;
@@ -21,11 +22,9 @@ class DialogueControl extends StatefulWidget {
   void speechToText() {
     _DialogueControlState().sTT();
   }
-
 }
 
 class _DialogueControlState extends State<DialogueControl> {
-
   Face psycubeImage = Face();
   SpeechRecognition speechRecognition = SpeechRecognition();
   FlutterTts flutterTts = FlutterTts();
@@ -52,14 +51,15 @@ class _DialogueControlState extends State<DialogueControl> {
   // ignore: missing_return
   Future<String> sTT() async {
     stt.SpeechToText speech = stt.SpeechToText();
-    bool available = await speech.initialize(onStatus: statusListener, onError: errorListener);
+    bool available = await speech.initialize(
+        onStatus: statusListener, onError: errorListener);
     if (available) {
       speech.listen(onResult: getResultListener);
-    }
-    else {
+    } else {
       print("The user has denied the use of speech recognition.");
     }
   }
+
   void errorListener(SpeechRecognitionError error) {
     setState(() {
       lastError = "${error.errorMsg} - ${error.permanent}";
@@ -76,9 +76,10 @@ class _DialogueControlState extends State<DialogueControl> {
   // returns user text deciphered from speech
   void getResultListener(SpeechRecognitionResult result) {
     setState(() {
-      lastWords = "${result.recognizedWords}"; //  - ${result.finalResult} (debugging status)
+      lastWords =
+          "${result.recognizedWords}"; //  - ${result.finalResult} (debugging status)
     });
-    print (lastWords);
+    print(lastWords);
     /*return lastWords;*/
   }
 
@@ -99,8 +100,8 @@ class _DialogueControlState extends State<DialogueControl> {
               child: TextField(
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
-                decoration:
-                InputDecoration.collapsed(hintText: "Send a message or press the mic"),
+                decoration: InputDecoration.collapsed(
+                    hintText: "Send a message or press the mic"),
               ),
             ),
             Container(
@@ -119,11 +120,14 @@ class _DialogueControlState extends State<DialogueControl> {
   // inserts bot response into message box
   void response(query) async {
     _textController.clear();
-    AuthGoogle authGoogle = await AuthGoogle(fileJson: "assets/credentials.json").build();
-    Dialogflow dialogflow = Dialogflow(authGoogle: authGoogle,language: Language.english);
+    AuthGoogle authGoogle =
+        await AuthGoogle(fileJson: "assets/credentials.json").build();
+    Dialogflow dialogflow =
+        Dialogflow(authGoogle: authGoogle, language: Language.english);
     AIResponse response = await dialogflow.detectIntent(query);
     ChatMessages message = ChatMessages(
-      text: response.getMessage() ?? TypeMessage(response.getListMessage()[0]).platform,
+      text: response.getMessage() ??
+          TypeMessage(response.getListMessage()[0]).platform,
       name: "Psycube",
       type: false,
     );
@@ -136,11 +140,11 @@ class _DialogueControlState extends State<DialogueControl> {
 
   // takes input text from response func and plays back voice
   Future _speak(String text) async {
-      await flutterTts.setVolume(volume);
-      await flutterTts.setPitch(pitchTest);
-      await flutterTts.setSpeechRate(rate);
-      await flutterTts.setLanguage(language);
-      await flutterTts.speak(text);
+    await flutterTts.setVolume(volume);
+    await flutterTts.setPitch(pitchTest);
+    await flutterTts.setSpeechRate(rate);
+    await flutterTts.setLanguage(language);
+    await flutterTts.speak(text);
   }
 
   void _handleSubmitted(String text) {
@@ -162,11 +166,11 @@ class _DialogueControlState extends State<DialogueControl> {
     return Column(children: <Widget>[
       new Flexible(
           child: new ListView.builder(
-            padding: new EdgeInsets.all(8.0),
-            reverse: true,
-            itemBuilder: (_, int index) => _messages[index],
-            itemCount: _messages.length,
-          )),
+        padding: new EdgeInsets.all(8.0),
+        reverse: true,
+        itemBuilder: (_, int index) => _messages[index],
+        itemCount: _messages.length,
+      )),
       new Divider(height: 1.0),
       new Container(
         decoration: new BoxDecoration(color: Theme.of(context).cardColor),
@@ -197,7 +201,7 @@ class ChatMessages extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(this.name, style:kChatBotText),
+              Text(this.name, style: kChatBotText),
               Container(
                 margin: const EdgeInsets.only(top: 5.0),
                 child: Text(text),
@@ -223,7 +227,8 @@ class ChatMessages extends StatelessWidget {
               Text(this.name, style: kChatBotText),
               Container(
                 margin: const EdgeInsets.only(top: 5.0),
-                child: Text(text), // or change to text for txt msg or lastWords for voice
+                child: Text(
+                    text), // or change to text for txt msg or lastWords for voice
               ),
             ],
           ),

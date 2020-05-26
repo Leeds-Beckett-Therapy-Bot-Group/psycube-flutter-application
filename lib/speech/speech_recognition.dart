@@ -10,10 +10,10 @@ class SpeechRecognition extends StatefulWidget {
 class _SpeechRecognitionState extends State<SpeechRecognition> {
   final dialogueControl = DialogueControl();
 
-  String microphoneActive() {
+  void microphoneActive() {
     dialogueControl.speechToText();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,11 +22,11 @@ class _SpeechRecognitionState extends State<SpeechRecognition> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-              SpeechButton(
-              icon:  Icons.mic,
-              onTap: () {
-                microphoneActive();
-              },
+          SpeechButton(
+            icon: Icons.mic,
+            onTap: () {
+              microphoneActive();
+            },
           ),
 
           /*SpeechButton(
@@ -37,7 +37,6 @@ class _SpeechRecognitionState extends State<SpeechRecognition> {
             icon: Icons.pause,
             onTap: speech.isListening ? cancelListening : null,
           ),*/
-
         ],
       ),
     );
