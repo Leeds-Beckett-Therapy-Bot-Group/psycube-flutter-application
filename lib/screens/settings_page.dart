@@ -35,6 +35,46 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           children: <Widget>[
             /// Zach - add new widgets in here to design the page. please don't delete any logout stuff it took me hours thx
+    OutlineButton(
+    shape: new RoundedRectangleBorder(
+    borderRadius: new BorderRadius.circular(30.0)),
+    child: Text('change password'),
+    onPressed: () {
+    Navigator.pushNamed(context, '/PasswordPage');
+    },
+
+        SizedBox(height:20,),
+
+        OutlineButton(
+    shape: new RoundedRectangleBorder(
+    borderRadius: new BorderRadius.circular(30.0)),
+    child: Text('Create new account'),
+    onPressed: () {
+    Navigator.pushNamed(context, '/SignupPage');
+    },
+
+    SizedBox(height:20,),
+
+    OutlineButton(
+    shape: new RoundedRectangleBorder(
+    borderRadius: new BorderRadius.circular(30.0)),
+    child: Text('About us'),
+    onPressed: () {
+    Navigator.pushNamed(context, '/AboutPage');
+    },
+
+    SizedBox(height:20,);
+
+        OutlineButton(
+        shape: new RoundedRectangleBorder(
+        borderRadius: new BorderRadius.circular(30.0)),
+      child: Text('return to home page'),
+      onPressed: () {
+        Navigator.pushNamed(context, '/HomePage');
+      },
+        SizedBox(height:20,);
+
+      /// note to self Leave the section below
             OutlineButton(
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(30.0)),
