@@ -53,7 +53,7 @@ class _ChatBotState extends State<ChatBot> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Expanded(
-              child: Pulse(
+              child: RubberBand(
                   child: Face()
               ),
             ), // components > psycube_image

@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_animator/flutter_animator.dart';
 
 class Face extends StatefulWidget {
   @override
@@ -14,53 +15,13 @@ class _FaceState extends State<Face> with TickerProviderStateMixin {
   int i;
   int randNumber = 0;
 
+  GlobalKey<AnimatorWidgetState> _key = GlobalKey<AnimatorWidgetState>();
+
+
   void psycubeImageGenerator() async {
     setState(() {
       randNumber = Random().nextInt(6);
     });
-  }
-
-  AnimationController motionController;
-  Animation motionAnimation;
-  double size = 20;
-
-  void initState() {
-    super.initState();
-
-    motionController = AnimationController(
-      duration: Duration(seconds: 1),
-      vsync: this,
-      lowerBound: 0.5,
-    );
-
-    motionAnimation = CurvedAnimation(
-      parent: motionController,
-      curve: Curves.ease,
-    );
-
-    motionController.forward();
-    motionController.addStatusListener((status) {
-      setState(() {
-        if (status == AnimationStatus.completed) {
-          motionController.reverse();
-        } else if (status == AnimationStatus.dismissed) {
-          motionController.forward();
-        }
-      });
-    });
-
-    motionController.addListener(() {
-      setState(() {
-        size = motionController.value * 250;
-      });
-    });
-    // motionController.repeat();
-  }
-
-  @override
-  void dispose() {
-    motionController.dispose();
-    super.dispose();
   }
 
   @override
@@ -69,11 +30,15 @@ class _FaceState extends State<Face> with TickerProviderStateMixin {
       child: FlatButton(
         onPressed: () {
           psycubeImageGenerator();
+          _key.currentState.forward();
         },
-        child: Container(
-          // height: size,
-          padding: EdgeInsets.all(35.0),
-          child: Image.asset('images/psycube_$randNumber.png'),
+        child: RubberBand(
+          key: _key,
+          child: Container(
+            // height: size,
+            padding: EdgeInsets.all(35.0),
+            child: Image.asset('images/psycube_$randNumber.png'),
+          ),
         ),
       ),
     );

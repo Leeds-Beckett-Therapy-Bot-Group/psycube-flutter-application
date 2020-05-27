@@ -17,7 +17,6 @@ class TaskTileUpdate extends State<TaskTile> {
   //Register a key in your state:
   GlobalKey<AnimatorWidgetState> _key = GlobalKey<AnimatorWidgetState>();
 
-
   int _defaultScore = 0;
 
   // currently not in use?
@@ -47,7 +46,6 @@ class TaskTileUpdate extends State<TaskTile> {
         setState(() {
           addToTracker();
           playSound();
-          _key.currentState.stop();
         });
       },
 
@@ -60,9 +58,6 @@ class TaskTileUpdate extends State<TaskTile> {
 
         // todo: need implementing within a dynamic list
 
-        // leading gets task title from task_manager class
-        // title gets task descr from task_manager class
-        // trailing gets point value from task_manager class
         // in task_manager these three values are randomzied within a function
         // the issue with this is that all values are randomzied so task titles
         // currently do not match with the relevant descriptions
