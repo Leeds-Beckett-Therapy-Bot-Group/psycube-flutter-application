@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animator/flutter_animator.dart';
 import '../tasks/task_tile.dart';
 import '../constants.dart';
 import '../tasks/task_tracker.dart';
 import 'package:therapyapp/components/navigation_drawer.dart';
+
 
 class Homepage extends StatefulWidget {
   @override
@@ -71,9 +73,9 @@ class _HomepageState extends State<Homepage> {
                 margin: EdgeInsets.all(15.0),
                 child: Column(
                   children: <Widget>[
-                    TaskTile(),
-                    TaskTile(),
-                    TaskTile(),
+                    FadeInLeft(child: TaskTile()),
+                    FadeInRight(child: TaskTile()),
+                    FadeInLeft(child: TaskTile()),
                   ],
                 ),
               ),

@@ -9,6 +9,7 @@ import 'package:therapyapp/charts/happiness.dart';
 import 'package:provider/provider.dart';
 import 'package:therapyapp/user/login_model.dart';
 import 'package:therapyapp/components/psycube_image.dart';
+import 'package:flutter_animator/flutter_animator.dart';
 
 class ChatBot extends StatefulWidget {
   @override
@@ -51,7 +52,11 @@ class _ChatBotState extends State<ChatBot> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Face(), // components > psycube_image
+            Expanded(
+              child: Pulse(
+                  child: Face()
+              ),
+            ), // components > psycube_image
             Expanded(
               child:
                   Container(width: double.infinity, child: DialogueControl()),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:therapyapp/constants.dart';
 import 'task_manager.dart';
 import 'package:audioplayers/audio_cache.dart';
+import 'package:flutter_animator/flutter_animator.dart';
+
 
 
 class TaskTile extends StatefulWidget {
@@ -12,6 +14,9 @@ class TaskTile extends StatefulWidget {
 /// updates point scores and should update progress bar in screens/home_page
 class TaskTileUpdate extends State<TaskTile> {
   TaskManager taskManager = TaskManager();
+  //Register a key in your state:
+  GlobalKey<AnimatorWidgetState> _key = GlobalKey<AnimatorWidgetState>();
+
 
   int _defaultScore = 0;
 
@@ -42,6 +47,7 @@ class TaskTileUpdate extends State<TaskTile> {
         setState(() {
           addToTracker();
           playSound();
+          _key.currentState.stop();
         });
       },
 

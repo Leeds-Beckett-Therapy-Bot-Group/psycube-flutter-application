@@ -16,9 +16,7 @@ void main() => runApp(Psycube());
 
 // git: https://github.com/Leeds-Beckett-Therapy-Bot-Group/psycube-flutter-application.git
 
-// todo: design profile page
-// todo: design settings page
-// todo: make your own test branch - git checkout -b "your_branch_name"
+
 
 /// Personal reminder in case we need to delete:
 /// Requirements for android: need to add permissions to
