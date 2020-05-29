@@ -44,6 +44,15 @@ const kInputDecoration = InputDecoration(
 );
 
 const TextStyle kProfilePageText = TextStyle(
-  fontSize: 20,
+  fontSize: 15,
   color: Colors.white,
+  fontFamily: 'Baloo'
+);
+
+const TextStyle kProfileHeaderText = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.w900,
+    fontFamily: 'Baloo',
+    fontSize: 40,
+
 );

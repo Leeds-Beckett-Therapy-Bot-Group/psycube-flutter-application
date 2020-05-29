@@ -70,18 +70,27 @@ class _ChatBotState extends State<ChatBot> {
                 style: kSecondaryText),
             Slider(
               onChanged: this._onSliderChange,
+              activeColor: Color(0xFF107dac),
+              inactiveColor: Colors.white,
               value: _sliderValue,
               min: 0,
               max: 10,
               divisions: 10,
             ),
             Consumer<LoginModel>(
-              builder: (context, loginModel, child) => RaisedButton(
+              builder: (context, loginModel, child) => OutlineButton(
                 onPressed: () {
                   this._submitValue(loginModel.user.uid);
                   playSound();
-                } ,
-                child: Text("Submit"),
+                },
+                borderSide: BorderSide(
+                  color: Colors.white,
+                ),
+                child: Text("Submit",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'Baloo',
+                )),
               ),
             )
           ],
