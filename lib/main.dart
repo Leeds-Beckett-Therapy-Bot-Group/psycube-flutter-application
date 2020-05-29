@@ -10,6 +10,8 @@ import 'screens/settings_page.dart';
 import 'screens/newtask_page.dart';
 import 'package:provider/provider.dart';
 import 'user/login_model.dart';
+import 'screens/changepass_page.dart';
+import 'screens/deleteacc_page.dart';
 
 void main() => runApp(Psycube());
 
@@ -49,6 +51,8 @@ class Psycube extends StatelessWidget {
             '/AboutPage': (context) => AboutPage(),
             '/SignUpPage': (context) => SignUpPage(),
             '/LoginPage': (context) => LoginPage(),
+            '/ChangePasswordPage': (context) => ChangePasswordPage(),
+            '/DelAccountPage': (context) => DelAccountPage(),
           },
           home: LoginPage(),
       ),
