@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:therapyapp/user/login_model.dart';
+import 'package:getflutter/getflutter.dart';
 
 class NavigationDrawer extends StatefulWidget {
   @override
@@ -28,33 +29,33 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
             ),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, '/HomePage');
+              Navigator.pushReplacementNamed(context, '/HomePage');
             },
           ),
           NavTile(
               barTitle: Text('Chat'),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/ChatBot');
+                Navigator.pushReplacementNamed(context, '/ChatBot');
               }),
           NavTile(
             barTitle: Text('Profile'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, '/ProfilePage');
+              Navigator.pushReplacementNamed(context, '/ProfilePage');
             },
           ),
           NavTile(
             barTitle: Text('Settings'),
             onTap: () {
-              Navigator.pushNamed(context, '/SettingsPage');
+              Navigator.pushReplacementNamed(context, '/SettingsPage');
             },
           ),
           NavTile(
             barTitle: Text('About'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, '/AboutPage');
+              Navigator.pushReplacementNamed(context, '/AboutPage');
             },
           ),
         ],
@@ -79,9 +80,10 @@ class NavDrawHeader extends StatelessWidget {
       child:
           Column(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
         Row(children: <Widget>[
-          CircleAvatar(
-            radius: 40,
-            backgroundImage: AssetImage('images/avatar.png'),
+          GFAvatar(
+              backgroundImage: AssetImage('images/psycube_0.png'),
+              backgroundColor: Colors.transparent,
+              shape: GFAvatarShape.square
           ),
         ]),
         SizedBox(
