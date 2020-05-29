@@ -26,17 +26,6 @@ class _HomepageState extends State<Homepage> {
           color: Colors.white,
         ),
       ),
-        /// add the new task page if we have time, if not we don't really need it anyway
-//      floatingActionButton: FloatingActionButton(
-//        onPressed: () {
-//          Navigator.pushReplacementNamed(context, '/NewTask');
-//        },
-//        backgroundColor: Color(0xFF107dac),
-//        child: Icon(
-//          Icons.add,
-//          color: Colors.white,
-//        ),
-//      ),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
