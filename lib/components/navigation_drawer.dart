@@ -25,7 +25,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   )),
           NavTile(
             barTitle: Text(
-              'Home',
+              'Activities',
             ),
             onTap: () {
               Navigator.pop(context);
