@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:therapyapp/charts/happiness.dart';
 import '../components/navigation_drawer.dart';
 import 'package:therapyapp/constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:therapyapp/charts/db_handler.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:therapyapp/user/login_model.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_animator/flutter_animator.dart';
 import '../constants.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -67,21 +66,42 @@ class _ProfilePageState extends State<ProfilePage> {
                                         CrossAxisAlignment.center,
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
+                                      BounceInUp(
+                                        child: Text(
+                                          'Welcome back!',
+                                          style: kProfileHeaderText,
+                                        ),
+                                      ),
                                       Consumer<LoginModel>(
                                           builder: (context, loginModel,
                                                   child) =>
-                                              Text(
-                                                  'Hey ${loginModel.user.displayName}! Look at the graph below to compare your mood on different days',
-                                                  style: kProfilePageText,
-                                                  textAlign: TextAlign.center)),
+                                              BounceInUp(
+                                                child: Text(
+                                                    'Logged in as: ${loginModel.user.email}',
+                                                    style: kProfilePageText,
+                                                    textAlign: TextAlign.center),
+                                              )),
                                       //putting the chart into a container - container must
                                       // have the height hard coded or the graph doesn't show up
                                       SizedBox(
-                                        height: 100,
+                                        height: 50,
+                                      ),
+                                      Text(
+                                        'Your Happiness over time',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Baloo',
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
                                       ),
                                       Container(
-                                        color: Colors.white,
-                                        height: 300,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10.0),
+                                          color: Color(0xFF107dac),
+                                        ),
+                                        height: 400,
                                         child: charts.TimeSeriesChart(
                                           //turns the snapshot of data into the chart using toTimeSeries method.
                                           this._toTimeSeries(snapshot.data),
@@ -98,13 +118,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                 padding: EdgeInsets.all(50),
                                 child: Center(
                                   child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Consumer<LoginModel>(
                                         builder: (context, loginModel, child) =>
-                                            Text(
-                                                'Hey ${loginModel.user.displayName}! Look at the graph below to compare your mood on different days',
-                                                style: kProfilePageText,
-                                                textAlign: TextAlign.center),
+                                            BounceInDown(
+                                              child: Text(
+                                                  'Logged in as: ${loginModel.user.displayName}',
+                                                  style: kProfilePageText,
+                                                  textAlign: TextAlign.left),
+                                            ),
                                       ),
                                       //putting the chart into a container - container must
                                       // have the height hard coded or the graph doesn't show up
@@ -119,9 +142,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                                     EdgeInsets.only(right: 25),
                                                 child:
                                                     CircularProgressIndicator()),
-                                            Text("Loading Graph...",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(fontSize: 20))
+                                            BounceInDown(
+                                              child: Text("Loading Graph...",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(fontSize: 20)),
+                                            )
                                           ]),
                                     ],
                                   ),
@@ -144,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
           //the data
           data: happinessLevel,
           //sets colour of the line
-          colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+          colorFn: (_, __) => charts.MaterialPalette.black,
           //x axis label - gets the time from hashmap
           domainFn: (Happiness happiness, _) => happiness.time,
           //y axis label - gets the happiness level from hashmap
